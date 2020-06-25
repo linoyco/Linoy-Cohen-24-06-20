@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FavoriteBorder } from '@material-ui/icons';
+import { useSelector } from 'react-redux';
 
 const StyledDiv: any = styled.div`
     display: flex;
@@ -26,16 +27,21 @@ const StyledItemsDiv: any = styled.div`
     height: 70%;
 `;
 
-const Item: React.FunctionComponent = () => (
-    <div style={{ height: '100%' }}>
-        <StyledDiv>
-            <StyledDetails><p>CityName<br />38 C</p></StyledDetails>
-            <StyledIconName><FavoriteBorder />Add to favorites</StyledIconName>
-        </StyledDiv>
-        <StyledItemsDiv>
-            HERE WILL BE
+const Item: React.FunctionComponent = () => {
+
+    const defaultLocation = useSelector((state: any) => state.app.location);
+
+    return (
+        <div style={{ height: '100%' }}>
+            <StyledDiv>
+                <StyledDetails><p>{defaultLocation}<br />38 C</p></StyledDetails>
+                <StyledIconName><FavoriteBorder />Add to favorites</StyledIconName>
+            </StyledDiv>
+            <StyledItemsDiv>
+                HERE WILL BE
         </StyledItemsDiv>
-    </div>
-);
+        </div>
+    );
+}
 
 export default Item;

@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppRoutes from './AppRoutes';
 import styled, { createGlobalStyle } from 'styled-components';
 import HeaderBar from '../Components/HeaderBar';
+import { useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
+import { setLocation } from '../State/Actions/App';
 
 interface IPropsGlobalStyles {
   backgroundColor: string;
@@ -44,8 +48,17 @@ const HeaderDiv: any = styled.header`
 `;
 
 const App: React.FunctionComponent = () => {
+  const dispatch: Dispatch = useDispatch();
 
   const [theme, setTheme] = useState('light');
+
+  const defaultLocation = useSelector((state: any) => state.app.location);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(setLocation('Haifa'));
+    }, 3000);
+  }, []);
 
   const changeMode = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
