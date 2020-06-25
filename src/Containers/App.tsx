@@ -1,25 +1,67 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState } from 'react';
 import AppRoutes from './AppRoutes';
-import { lightTheme, darkTheme } from '../Lib/Themes';
-import { GlobalStyles } from '../Lib/GlobalStyles';
-import { ThemeProvider } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import HeaderBar from '../Components/HeaderBar';
+
+interface IPropsGlobalStyles {
+  backgroundColor: string;
+  textColor: string;
+};
+
+const GlobalStyles: any = createGlobalStyle<IPropsGlobalStyles>`
+  html{    
+    background: ${(props: IPropsGlobalStyles) => props.backgroundColor};
+    color: ${(props: IPropsGlobalStyles) => props.textColor};
+    font-family: Tahoma, Helvetica, Arial, Roboto, sans-serif;
+    font-weight: bold;
+    
+    height: 100%;
+    width: 100%;
+  }
+  body{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+  }
+  #root {
+    height: 100%;
+  }
+`;
+
+const DivStyle: any = styled.div`
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+`;
+
+const HeaderDiv: any = styled.header`
+  width: 100%;
+  margin-bottom: 5%;
+`;
 
 const App: React.FunctionComponent = () => {
 
   const [theme, setTheme] = useState('light');
 
-  const themeToggler = () => {
+  const changeMode = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
   }
 
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <GlobalStyles />
-      <AppRoutes />
+    <DivStyle>
+      <GlobalStyles backgroundColor={theme === 'light' ? 'white' : '#4E5D89'} textColor={theme === 'light' ? 'black' : 'white'} />
+      <HeaderDiv>
+        <HeaderBar />
+      </HeaderDiv>
 
-      <button onClick={() => themeToggler()}>Switch Theme</button>
-    </ThemeProvider>
+      <AppRoutes />
+      <button onClick={() => changeMode()}>Switch Theme</button>
+    </DivStyle>
   );
 }
 
