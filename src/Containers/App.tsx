@@ -41,7 +41,6 @@ const DivStyle: any = styled.div`
 
 const HeaderDiv: any = styled.header`
   width: 100%;
-  margin-bottom: 5%;
 `;
 
 const App: React.FunctionComponent = () => {
