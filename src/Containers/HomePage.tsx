@@ -17,7 +17,6 @@ const HomePage: React.FunctionComponent = () => {
             <TextField label="Search City" type="search" />
             <Item />
         </StyledDiv>
-
     );
 }
 
