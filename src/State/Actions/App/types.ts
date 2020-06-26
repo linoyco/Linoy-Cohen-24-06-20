@@ -5,4 +5,4 @@ export interface ISetLocation {
     location: string;
 }
 
-export type appActionType = ISetLocation ;
+export type appActionType = ISetLocation;

@@ -56,7 +56,7 @@ const App: React.FunctionComponent = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(setLocation('Haifa'));
+      // dispatch(setLocation('Haifa'));
     }, 3000);
   }, []);
 

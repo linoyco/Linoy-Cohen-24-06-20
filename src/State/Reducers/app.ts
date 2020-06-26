@@ -3,15 +3,14 @@ import { SET_LOCATION, appActionType } from '../Actions/App/types';
 import { IAutocompleteOBJ, ICurrentWeatherOBJ, IFiveDaysWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
 
 export interface IAppState {
-    location: string,
     autocompleteList: Array<IAutocompleteOBJ>,
     currentWeatherList: Array<ICurrentWeatherOBJ>,
     fiveDaysWeather: IFiveDaysWeatherOBJ,
-    geolocationKey: IGeolocationKeyOBJ
+    geolocationKey: IGeolocationKeyOBJ,
+    location: string,
 }
 
 const initialState: IAppState = {
-    location: 'Tel-Aviv',
     autocompleteList: [],
     currentWeatherList: [],
     fiveDaysWeather: {
@@ -80,7 +79,8 @@ const initialState: IAppState = {
         IsAlias: false,
         SupplementalAdminAreas: [],
         DataSets: []
-    }
+    },
+    location: '',
 }
 
 export function appReducer(state: IAppState = initialState, action: appActionType) {
@@ -91,5 +91,4 @@ export function appReducer(state: IAppState = initialState, action: appActionTyp
                 break;
         }
     });
-
 }
