@@ -6,10 +6,11 @@ interface IProps {
     date: string;
     imageNumber: number;
     iconName: string;
+    tempFC: string;
 }
 
-const Item: React.FunctionComponent<IProps> = ({ day, date, imageNumber, iconName }) => (
-    <Card style={{ height: '70%', margin: '1%' }}>
+const Item: React.FunctionComponent<IProps> = ({ day, date, imageNumber, iconName, tempFC }) => (
+    <Card style={{ height: '85%', margin: '1%' }}>
         <CardHeader
             title={day}
             subheader={date}
@@ -20,6 +21,7 @@ const Item: React.FunctionComponent<IProps> = ({ day, date, imageNumber, iconNam
             title='img'
             style={{ height: 0, paddingTop: '56%' }}
         />
+        <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>{tempFC}</CardContent>
         <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>{iconName}</CardContent>
     </Card>
 );

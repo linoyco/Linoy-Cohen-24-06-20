@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import Item from '../Components/Item';
-import { searchingBy, searchByCity } from '../State/Actions/Home/index';
+import { searchingBy, searchByCity, changeTempMode } from '../State/Actions/Home/index';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { IAutocompleteOBJ, IFiveDaysWeatherOBJ, IDailyForecastsOBJ } from '../Api/apiObjects';
 import { FavoriteBorder } from '@material-ui/icons';
 import moment from 'moment';
+import { Button } from '@material-ui/core';
 
 const StyledDiv: any = styled.div`
     margin-left: 1%;
@@ -46,19 +47,20 @@ interface fiveDaysCardDetails {
     date: string;
     imageNumber: number;
     iconName: string;
+    tempFC: number;
 }
 
 const HomePage: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
 
     const [searchBy, setSearchBy] = React.useState('');
-    const [city, setCity] = React.useState('');
-    const [temp, setTemp] = React.useState<number>();
     const [localFiveDaysList, setLocalFiveDaysList] = React.useState<Array<fiveDaysCardDetails>>([]);
     const [localAutocompleteList, setLocalAutocompleteList] = React.useState<Array<{ city: string, key: string }>>([]);
 
     const autocomplete: Array<IAutocompleteOBJ> = useSelector((state: any) => state.home.autocompleteList);
     const fiveDays: IFiveDaysWeatherOBJ = useSelector((state: any) => state.home.fiveDaysWeather);
+    const localFCMode: boolean = useSelector((state: any) => state.home.fCMode);
+    const globalLocationKey: string = useSelector((state: any) => state.app.locationKey);
 
     React.useEffect(() => {
         dispatch(searchingBy(searchBy));
@@ -78,7 +80,6 @@ const HomePage: React.FunctionComponent = () => {
 
     const handleSelectCity = (e: string) => {
         setSearchBy(e);
-        let locationKey = '215854';
 
         // for (let i of localAutocompleteList) {
         //     if (e === i.city) {
@@ -91,9 +92,8 @@ const HomePage: React.FunctionComponent = () => {
         // }
         //call action 5 days
 
-        dispatch(searchByCity(locationKey, false));
+        dispatch(searchByCity(globalLocationKey, localFCMode));
     }
-
 
     const mapFiveDaysToList = () => {
         let myList: Array<fiveDaysCardDetails> = [];
@@ -103,12 +103,10 @@ const HomePage: React.FunctionComponent = () => {
                 date: moment.parseZone(day.Date).format("MM/DD/YYYY"),
                 day: moment(day.Date).format('dddd'),
                 imageNumber: day.Day.Icon,
-                iconName: day.Day.IconPhrase
+                iconName: day.Day.IconPhrase,
+                tempFC: day.Temperature.Minimum.Value
             }
             myList.push(myObj);
-            setTemp(day.Temperature.Minimum.Value);
-            // setCity(day.)
-
         },
             setLocalFiveDaysList(myList));
         mapFiveDaysToCard();
@@ -123,8 +121,13 @@ const HomePage: React.FunctionComponent = () => {
                 day={day.day}
                 imageNumber={day.imageNumber}
                 iconName={day.iconName}
+                tempFC={localFCMode ? `${day.tempFC}°C` : `${day.tempFC}°F`}
             />
         );
+    }
+
+    const handleFCMode = () => {
+        localFCMode ? dispatch(changeTempMode(globalLocationKey, false)) : dispatch(changeTempMode(globalLocationKey, true));
     }
 
     return (
@@ -141,9 +144,10 @@ const HomePage: React.FunctionComponent = () => {
                 />}
             />
             <StyledSecDiv>
-                <StyledDetails><p>{'defaultLocation'}<br />{temp}</p></StyledDetails>
+                <StyledDetails><p>{'DefaultLocation'}<br />Temp</p></StyledDetails>
                 <StyledIconName><FavoriteBorder />Add to favorites</StyledIconName>
             </StyledSecDiv>
+            <Button onClick={() => handleFCMode()}>F\C</Button>
             <StyledItemsDiv>
                 {mapFiveDaysToCard()}
             </StyledItemsDiv>

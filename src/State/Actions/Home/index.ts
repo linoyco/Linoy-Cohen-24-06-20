@@ -14,3 +14,11 @@ export function searchByCity(locationKey: string, fCMode: boolean): HomeActions.
         fCMode: fCMode
     }
 }
+
+export function changeTempMode(locationKey: string, fCMode: boolean): HomeActions.IChangeTempMode {
+    return {
+        type: HomeActions.CHANGE_TEMP_MODE,
+        fCMode: fCMode,
+        locationKey: locationKey
+    }
+}

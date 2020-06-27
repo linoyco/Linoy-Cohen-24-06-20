@@ -5,6 +5,7 @@ import { ICurrentWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
 export interface IAppState {
     currentWeatherList: Array<ICurrentWeatherOBJ>,
     geolocationKey: IGeolocationKeyOBJ,
+    locationKey: string,
     location: string,
     mode: string
 }
@@ -66,7 +67,8 @@ const initialState: IAppState = {
         DataSets: []
     },
     location: '',
-    mode: 'light'
+    mode: 'light',
+    locationKey: '215854'
 }
 
 export function appReducer(state: IAppState = initialState, action: appActionType) {

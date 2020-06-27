@@ -1,11 +1,12 @@
 import produce from 'immer';
-import { homeActionType, SEARCHING_BY, SAVE_AUTOCOMPLETE_LIST, SAVE_FIVE_DAYS } from '../Actions/Home/types';
+import { homeActionType, SEARCHING_BY, SAVE_AUTOCOMPLETE_LIST, SAVE_FIVE_DAYS, CHANGE_TEMP_MODE, SET_TEMP_MODE } from '../Actions/Home/types';
 import { IAutocompleteOBJ, IFiveDaysWeatherOBJ } from '../../Api/apiObjects';
 
 export interface IHomeState {
     searchingBy: string,
     autocompleteList: Array<IAutocompleteOBJ>,
     fiveDaysWeather: IFiveDaysWeatherOBJ,
+    fCMode: boolean;
 }
 
 const initialState: IHomeState = {
@@ -24,6 +25,7 @@ const initialState: IHomeState = {
             Link: ''
         }, DailyForecasts: []
     },
+    fCMode: true
 }
 
 export function homeReducer(state: IHomeState = initialState, action: homeActionType) {
@@ -37,6 +39,9 @@ export function homeReducer(state: IHomeState = initialState, action: homeAction
                 break;
             case SAVE_FIVE_DAYS:
                 draft.fiveDaysWeather = action.fiveDaysWeather;
+                break;
+            case SET_TEMP_MODE:
+                draft.fCMode = action.fCMode;
                 break;
         }
     });

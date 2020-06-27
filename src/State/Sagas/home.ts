@@ -1,5 +1,5 @@
 import { put, take, call } from 'redux-saga/effects';
-import { SEARCHING_BY, SAVE_AUTOCOMPLETE_LIST, FIVE_DAYS_REQUEST, SAVE_FIVE_DAYS } from '../Actions/Home/types';
+import { SEARCHING_BY, SAVE_AUTOCOMPLETE_LIST, FIVE_DAYS_REQUEST, SAVE_FIVE_DAYS, CHANGE_TEMP_MODE, SET_TEMP_MODE } from '../Actions/Home/types';
 import * as Api from '../../Api';
 
 function* fetchAutocomplete(searchingBy: string) {
@@ -33,5 +33,16 @@ export function* watchFiveDaysWeather() {
     while (true) {
         const { locationKey, fCMode } = yield take(FIVE_DAYS_REQUEST);
         yield call(fetchFiveDaysWeather, locationKey, fCMode);
+    }
+};
+
+export function* watchFCMode() {
+    while (true) {
+        const { locationKey, fCMode } = yield take(CHANGE_TEMP_MODE);
+
+        const res = yield call(Api.fiveDaysRequest, locationKey, fCMode);
+        yield put({ type: SAVE_FIVE_DAYS, fiveDaysWeather: res.data });
+
+        yield put({ type: SET_TEMP_MODE, fCMode: fCMode });
     }
 };

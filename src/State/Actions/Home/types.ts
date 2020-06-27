@@ -4,6 +4,8 @@ export const SEARCHING_BY = 'SEARCHING_BY';
 export const SAVE_AUTOCOMPLETE_LIST = 'SAVE_AUTOCOMPLETE_LIST';
 export const FIVE_DAYS_REQUEST = 'FIVE_DAYS_REQUEST';
 export const SAVE_FIVE_DAYS = 'SAVE_FIVE_DAYS';
+export const CHANGE_TEMP_MODE = 'CHANGE_TEMP_MODE';
+export const SET_TEMP_MODE = 'SET_TEMP_MODE';
 
 export interface ISearchingBy {
     type: typeof SEARCHING_BY;
@@ -26,7 +28,20 @@ export interface ISaveFiveDays {
     fiveDaysWeather: IFiveDaysWeatherOBJ;
 }
 
+export interface IChangeTempMode {
+    type: typeof CHANGE_TEMP_MODE;
+    locationKey: string;
+    fCMode: boolean;
+}
+
+export interface ISetTempMode {
+    type: typeof SET_TEMP_MODE;
+    fCMode: boolean;
+}
+
 export type homeActionType = ISearchingBy
     | ISaveAutocompleteList
     | IFiveDaysRequest
-    | ISaveFiveDays;
+    | ISaveFiveDays
+    | IChangeTempMode
+    | ISetTempMode;
