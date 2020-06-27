@@ -1,29 +1,15 @@
 import produce from 'immer';
 import { SET_LOCATION, appActionType } from '../Actions/App/types';
-import { ICurrentWeatherOBJ, IFiveDaysWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
+import { ICurrentWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
 
 export interface IAppState {
     currentWeatherList: Array<ICurrentWeatherOBJ>,
-    fiveDaysWeather: IFiveDaysWeatherOBJ,
     geolocationKey: IGeolocationKeyOBJ,
     location: string,
 }
 
 const initialState: IAppState = {
     currentWeatherList: [],
-    fiveDaysWeather: {
-        Headline: {
-            EffectiveDate: '',
-            EffectiveEpochDate: 0,
-            Severity: 0,
-            Text: '',
-            Category: '',
-            EndDate: null,
-            EndEpochDate: null,
-            MobileLink: '',
-            Link: ''
-        }, DailyForecasts: []
-    },
     geolocationKey: {
         Version: 0,
         Key: '',

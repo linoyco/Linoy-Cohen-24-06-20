@@ -6,3 +6,11 @@ export function searchingBy(searchingBy: string): HomeActions.ISearchingBy {
         searchingBy: searchingBy
     }
 }
+
+export function searchByCity(locationKey: string, fCMode: boolean): HomeActions.IFiveDaysRequest {
+    return {
+        type: HomeActions.FIVE_DAYS_REQUEST,
+        locationKey: locationKey,
+        fCMode: fCMode
+    }
+}

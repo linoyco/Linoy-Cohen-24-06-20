@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import Item from '../Components/Item';
-import { searchingBy } from '../State/Actions/Home/index';
+import { searchingBy, searchByCity } from '../State/Actions/Home/index';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { IAutocompleteOBJ } from '../Api/apiObjects';
-
+import { IAutocompleteOBJ, IFiveDaysWeatherOBJ } from '../Api/apiObjects';
 
 const StyledDiv: any = styled.div`
     margin-left: 1%;
@@ -20,35 +19,56 @@ const HomePage: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
 
     const [searchBy, setSearchBy] = React.useState('');
-    const [localAutocompleteList, setLocalAutocompleteList] = React.useState<Array<string>>([]);
+    const [localAutocompleteList, setLocalAutocompleteList] = React.useState<Array<{ city: string, key: string }>>([]);
 
     const autocomplete: Array<IAutocompleteOBJ> = useSelector((state: any) => state.home.autocompleteList);
+    const fiveDays: IFiveDaysWeatherOBJ = useSelector((state: any) => state.home.fiveDaysWeather);
 
     React.useEffect(() => {
         dispatch(searchingBy(searchBy));
-        console.log(searchBy);
-
     }, [searchBy]);
 
     React.useEffect(() => {
-        let container: Array<string> = [];
+        let container: Array<{ city: string, key: string }> = [];
         for (let i of autocomplete) {
-            container.push(i.LocalizedName);
+            container.push({ city: i.LocalizedName, key: i.Key });
         }
         setLocalAutocompleteList(container);
-
     }, [autocomplete]);
+
+    React.useEffect(() => {
+        console.log(fiveDays);
+
+    }, [fiveDays]);
+
+    const handleSelectCity = (e: string) => {
+        setSearchBy(e);
+        let locationKey = '215854';
+        // for (let i of localAutocompleteList) {
+        //     if (e === i.city) {
+        //         locationKey = i.key;
+        //         console.log(i.key);
+
+        //     } else {
+        //         return;
+        //     }
+        // }
+        //call action 5 days
+        // dispatch(searchByCity(locationKey, false));
+        dispatch(searchByCity(locationKey, false));
+    }
 
     return (
         <StyledDiv>
             <Autocomplete
                 options={localAutocompleteList}
-                onSelect={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBy(e.target.value)}
+                getOptionLabel={(option) => option.city}
+                onSelect={(e: React.ChangeEvent<HTMLInputElement>) => handleSelectCity(e.target.value)}
                 renderInput={(searchBy) => <TextField {...searchBy}
                     label='Search City'
                     value={searchBy}
                     style={{ width: '30%' }}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBy(e.target.value)}
+                // onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBy(e.target.value)}
                 />}
             />
             <Item />
