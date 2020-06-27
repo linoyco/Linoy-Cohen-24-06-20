@@ -1,59 +1,113 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FavoriteBorder } from '@material-ui/icons';
-import { useSelector } from 'react-redux';
-
-const StyledDiv: any = styled.div`
-    display: flex;
-    height: 30%;
-    margin-top: 1%;
-`;
-
-const StyledIconName: any = styled.p`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 3%;
-`;
-
-const StyledDetails: any = styled.div`
-    margin-left: 5%;
-`;
+import { CardMedia, Card, CardContent, CardHeader } from '@material-ui/core';
 
 const StyledItemsDiv: any = styled.div`
     display: flex;
-    height: 70%;
+    justify-content: space-around;
+    height: 80%;
+    border: 2px solid yellow;
 `;
 
-const StyledOneItem: any = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 60%;
-    width: 15%;
-    border: 1px solid black;
-    margin: 1%;
-`;
+// const StyledOneItem: any = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     height: 60%;
+//     width: 15%;
+//     border: 1px solid black;
+//     margin: 1%;
+// `;
 
 const Item: React.FunctionComponent = () => {
 
-    const defaultLocation = useSelector((state: any) => state.app.location);
-
     return (
-        <div style={{ height: '100%' }}>
-            <StyledDiv>
-                <StyledDetails><p>{defaultLocation}<br />38 C</p></StyledDetails>
-                <StyledIconName><FavoriteBorder />Add to favorites</StyledIconName>
-            </StyledDiv>
-            <StyledItemsDiv>
-                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
-                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
-                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
-                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
-                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
-            </StyledItemsDiv>
-        </div>
+        <StyledItemsDiv>
+            <Card style={{ width: '15%', height: '70%', margin: '1%' }}>
+                <CardHeader
+                    title="Day"
+                    subheader="27/06/2020"
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                />
+                <CardMedia
+                    image={require('../Images/' + 5 + '.png')}
+                    title='Paella dish'
+                    style={{ height: 0, paddingTop: '56%' }}
+                />
+                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    Sunny
+      </CardContent>
+            </Card>
+
+
+
+
+
+            <Card style={{ width: '15%', height: '70%', margin: '1%' }}>
+                <CardHeader
+                    title="Day"
+                    subheader="27/06/2020"
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                />
+                <CardMedia
+                    image={require('../Images/' + 5 + '.png')}
+                    title='Paella dish'
+                    style={{ height: 0, paddingTop: '56%' }}
+                />
+                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    Sunny
+      </CardContent>
+            </Card>
+            <Card style={{ width: '15%', height: '70%', margin: '1%' }}>
+                <CardHeader
+                    title="Day"
+                    subheader="27/06/2020"
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                />
+                <CardMedia
+                    image={require('../Images/' + 5 + '.png')}
+                    title='Paella dish'
+                    style={{ height: 0, paddingTop: '56%' }}
+                />
+                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    Sunny
+      </CardContent>
+            </Card>
+            <Card style={{ width: '15%', height: '70%', margin: '1%' }}>
+                <CardHeader
+                    title="Day"
+                    subheader="27/06/2020"
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                />
+                <CardMedia
+                    image={require('../Images/' + 5 + '.png')}
+                    title='Paella dish'
+                    style={{ height: 0, paddingTop: '56%' }}
+                />
+                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    Sunny
+      </CardContent>
+            </Card>
+            <Card style={{ width: '15%', height: '70%', margin: '1%' }}>
+                <CardHeader
+                    title="Day"
+                    subheader="27/06/2020"
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                />
+                <CardMedia
+                    image={require('../Images/' + 5 + '.png')}
+                    title='Paella dish'
+                    style={{ height: 0, paddingTop: '56%' }}
+                />
+                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    Sunny
+      </CardContent>
+            </Card>
+
+
+
+
+        </StyledItemsDiv>
     );
 }
 

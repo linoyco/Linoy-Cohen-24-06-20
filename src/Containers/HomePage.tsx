@@ -7,12 +7,31 @@ import Item from '../Components/Item';
 import { searchingBy, searchByCity } from '../State/Actions/Home/index';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { IAutocompleteOBJ, IFiveDaysWeatherOBJ } from '../Api/apiObjects';
+import { FavoriteBorder } from '@material-ui/icons';
 
 const StyledDiv: any = styled.div`
     margin-left: 1%;
     margin-right: auto;
     width: 100%;
     height: 70%;
+`;
+
+const StyledSecDiv: any = styled.div`
+    display: flex;
+    height: 30%;
+    margin-top: 1%;
+`;
+
+const StyledIconName: any = styled.p`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 3%;
+`;
+
+const StyledDetails: any = styled.div`
+    margin-left: 5%;
 `;
 
 const HomePage: React.FunctionComponent = () => {
@@ -71,6 +90,10 @@ const HomePage: React.FunctionComponent = () => {
                 // onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBy(e.target.value)}
                 />}
             />
+            <StyledSecDiv>
+                <StyledDetails><p>{'defaultLocation'}<br />38 C</p></StyledDetails>
+                <StyledIconName><FavoriteBorder />Add to favorites</StyledIconName>
+            </StyledSecDiv>
             <Item />
         </StyledDiv>
     );
