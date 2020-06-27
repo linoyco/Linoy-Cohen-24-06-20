@@ -55,10 +55,21 @@ const App: React.FunctionComponent = () => {
   const defaultLocation = useSelector((state: any) => state.app.location);
 
   useEffect(() => {
-    setTimeout(() => {
-      // dispatch(setLocation('Haifa'));
-    }, 3000);
+    // setTimeout(() => {
+    //   // dispatch(setLocation('Haifa'));
+    // }, 3000);
+    getGeolocation();
   }, []);
+
+  const getGeolocation = () => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const latitude = position.coords.latitude
+      const longitude = position.coords.longitude
+      console.log(latitude, longitude);
+    }, function (err) {
+      console.log(err);
+    });
+  }
 
   const changeMode = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
