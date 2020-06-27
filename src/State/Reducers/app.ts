@@ -1,11 +1,12 @@
 import produce from 'immer';
-import { SET_LOCATION, appActionType } from '../Actions/App/types';
+import { SET_LOCATION, appActionType, CHANGE_MODE } from '../Actions/App/types';
 import { ICurrentWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
 
 export interface IAppState {
     currentWeatherList: Array<ICurrentWeatherOBJ>,
     geolocationKey: IGeolocationKeyOBJ,
     location: string,
+    mode: string
 }
 
 const initialState: IAppState = {
@@ -65,6 +66,7 @@ const initialState: IAppState = {
         DataSets: []
     },
     location: '',
+    mode: 'light'
 }
 
 export function appReducer(state: IAppState = initialState, action: appActionType) {
@@ -72,6 +74,9 @@ export function appReducer(state: IAppState = initialState, action: appActionTyp
         switch (action.type) {
             case SET_LOCATION:
                 draft.location = action.location;
+                break;
+            case CHANGE_MODE:
+                draft.mode = action.mode;
                 break;
         }
     });

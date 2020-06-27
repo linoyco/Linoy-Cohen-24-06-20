@@ -38,7 +38,7 @@ export interface ICurrentWeatherOBJ {
     Link: string
 };
 
-interface IDailyForecastsOBJ {
+export interface IDailyForecastsOBJ {
     Date: string,
     EpochDate: number,
     Temperature: {
@@ -68,7 +68,7 @@ interface IDailyForecastsOBJ {
     Link: string
 };
 
-interface IHeadlineOBJ {
+export interface IHeadlineOBJ {
     EffectiveDate: string,
     EffectiveEpochDate: number,
     Severity: number,

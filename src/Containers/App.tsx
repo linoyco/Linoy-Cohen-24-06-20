@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import AppRoutes from './AppRoutes';
 import styled, { createGlobalStyle } from 'styled-components';
 import HeaderBar from '../Components/HeaderBar';
-import { useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import { useDispatch } from 'react-redux';
-import { setLocation } from '../State/Actions/App';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeModeStyle } from '../State/Actions/App';
 
 interface IPropsGlobalStyles {
   backgroundColor: string;
@@ -50,14 +49,9 @@ const HeaderDiv: any = styled.header`
 const App: React.FunctionComponent = () => {
   const dispatch: Dispatch = useDispatch();
 
-  const [theme, setTheme] = useState('light');
-
-  const defaultLocation = useSelector((state: any) => state.app.location);
+  const mode: string = useSelector((state: any) => state.app.mode);
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   // dispatch(setLocation('Haifa'));
-    // }, 3000);
     getGeolocation();
   }, []);
 
@@ -72,18 +66,16 @@ const App: React.FunctionComponent = () => {
   }
 
   const changeMode = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light');
+    mode === 'light' ? dispatch(changeModeStyle('dark')) : dispatch(changeModeStyle('light'));
   }
 
   return (
     <DivStyle>
-      <GlobalStyles backgroundColor={theme === 'light' ? 'white' : '#4E5D89'} textColor={theme === 'light' ? 'black' : 'white'} />
+      <GlobalStyles backgroundColor={mode === 'light' ? 'white' : '#4E5D89'} textColor={mode === 'light' ? 'black' : 'white'} />
       <HeaderDiv>
-        <HeaderBar />
+        <HeaderBar changeMode={changeMode} />
       </HeaderDiv>
-
       <AppRoutes />
-      <button onClick={() => changeMode()}>Switch Theme</button>
     </DivStyle>
   );
 }

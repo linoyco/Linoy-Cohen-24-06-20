@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Brightness4, Favorite, Home } from '@material-ui/icons';
+import { Button } from '@material-ui/core';
 
 const StyledDiv: any = styled.div`
     background-color: #4E5D89;
@@ -29,13 +30,17 @@ const StyledDivIcons: any = styled.div`
     margin-right: 1%;
 `;
 
-const HeaderBar: React.FunctionComponent = () => (
+interface IProps {
+    changeMode: () => void;
+}
+
+const HeaderBar: React.FunctionComponent<IProps> = ({ changeMode }) => (
     <StyledDiv>
         <StyledTitle>National Current Weather</StyledTitle>
         <StyledDivIcons>
-            <StyledIconName><Brightness4 />Mode</StyledIconName>
-            <StyledIconName><Favorite />Favorites</StyledIconName>
-            <StyledIconName><Home />Home</StyledIconName>
+            <StyledIconName><Button onClick={changeMode} style={{ color: 'white' }}><Brightness4 /></Button>Mode</StyledIconName>
+            <StyledIconName><Button style={{ color: 'white' }}><Favorite /></Button>Favorites</StyledIconName>
+            <StyledIconName><Button style={{ color: 'white' }}><Home /></Button>Home</StyledIconName>
         </StyledDivIcons>
     </StyledDiv>
 );

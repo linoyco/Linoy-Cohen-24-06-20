@@ -6,3 +6,10 @@ export function setLocation(location: string): AppActions.ISetLocation {
         location: location
     }
 }
+
+export function changeModeStyle(mode: string): AppActions.IChangeMode {
+    return {
+        type: AppActions.CHANGE_MODE,
+        mode: mode
+    }
+}

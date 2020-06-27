@@ -6,8 +6,9 @@ import styled from 'styled-components';
 import Item from '../Components/Item';
 import { searchingBy, searchByCity } from '../State/Actions/Home/index';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { IAutocompleteOBJ, IFiveDaysWeatherOBJ } from '../Api/apiObjects';
+import { IAutocompleteOBJ, IFiveDaysWeatherOBJ, IDailyForecastsOBJ } from '../Api/apiObjects';
 import { FavoriteBorder } from '@material-ui/icons';
+import moment from 'moment';
 
 const StyledDiv: any = styled.div`
     margin-left: 1%;
@@ -34,10 +35,26 @@ const StyledDetails: any = styled.div`
     margin-left: 5%;
 `;
 
+const StyledItemsDiv: any = styled.div`
+    display: flex;
+    justify-content: space-around;
+    height: 80%;
+`;
+
+interface fiveDaysCardDetails {
+    day: string;
+    date: string;
+    imageNumber: number;
+    iconName: string;
+}
+
 const HomePage: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
 
     const [searchBy, setSearchBy] = React.useState('');
+    const [city, setCity] = React.useState('');
+    const [temp, setTemp] = React.useState<number>();
+    const [localFiveDaysList, setLocalFiveDaysList] = React.useState<Array<fiveDaysCardDetails>>([]);
     const [localAutocompleteList, setLocalAutocompleteList] = React.useState<Array<{ city: string, key: string }>>([]);
 
     const autocomplete: Array<IAutocompleteOBJ> = useSelector((state: any) => state.home.autocompleteList);
@@ -56,13 +73,13 @@ const HomePage: React.FunctionComponent = () => {
     }, [autocomplete]);
 
     React.useEffect(() => {
-        console.log(fiveDays);
-
+        mapFiveDaysToList();
     }, [fiveDays]);
 
     const handleSelectCity = (e: string) => {
         setSearchBy(e);
         let locationKey = '215854';
+
         // for (let i of localAutocompleteList) {
         //     if (e === i.city) {
         //         locationKey = i.key;
@@ -73,8 +90,41 @@ const HomePage: React.FunctionComponent = () => {
         //     }
         // }
         //call action 5 days
-        // dispatch(searchByCity(locationKey, false));
+
         dispatch(searchByCity(locationKey, false));
+    }
+
+
+    const mapFiveDaysToList = () => {
+        let myList: Array<fiveDaysCardDetails> = [];
+
+        fiveDays.DailyForecasts.map((day) => {
+            let myObj: fiveDaysCardDetails = {
+                date: moment.parseZone(day.Date).format("MM/DD/YYYY"),
+                day: moment(day.Date).format('dddd'),
+                imageNumber: day.Day.Icon,
+                iconName: day.Day.IconPhrase
+            }
+            myList.push(myObj);
+            setTemp(day.Temperature.Minimum.Value);
+            // setCity(day.)
+
+        },
+            setLocalFiveDaysList(myList));
+        mapFiveDaysToCard();
+    }
+
+    const mapFiveDaysToCard = () => {
+        if (localFiveDaysList.length === 0) return <div></div>;
+        return localFiveDaysList.map((day, idx) =>
+            <Item
+                key={idx}
+                date={day.date}
+                day={day.day}
+                imageNumber={day.imageNumber}
+                iconName={day.iconName}
+            />
+        );
     }
 
     return (
@@ -91,10 +141,12 @@ const HomePage: React.FunctionComponent = () => {
                 />}
             />
             <StyledSecDiv>
-                <StyledDetails><p>{'defaultLocation'}<br />38 C</p></StyledDetails>
+                <StyledDetails><p>{'defaultLocation'}<br />{temp}</p></StyledDetails>
                 <StyledIconName><FavoriteBorder />Add to favorites</StyledIconName>
             </StyledSecDiv>
-            <Item />
+            <StyledItemsDiv>
+                {mapFiveDaysToCard()}
+            </StyledItemsDiv>
         </StyledDiv>
     );
 }
