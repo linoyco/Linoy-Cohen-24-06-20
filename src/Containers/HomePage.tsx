@@ -26,6 +26,8 @@ const HomePage: React.FunctionComponent = () => {
 
     React.useEffect(() => {
         dispatch(searchingBy(searchBy));
+        console.log(searchBy);
+
     }, [searchBy]);
 
     React.useEffect(() => {
@@ -34,12 +36,14 @@ const HomePage: React.FunctionComponent = () => {
             container.push(i.LocalizedName);
         }
         setLocalAutocompleteList(container);
+
     }, [autocomplete]);
 
     return (
         <StyledDiv>
             <Autocomplete
                 options={localAutocompleteList}
+                onSelect={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBy(e.target.value)}
                 renderInput={(searchBy) => <TextField {...searchBy}
                     label='Search City'
                     value={searchBy}
