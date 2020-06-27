@@ -7,7 +7,6 @@ const StyledDiv: any = styled.div`
     display: flex;
     height: 30%;
     margin-top: 1%;
-    border: 2px solid red;
 `;
 
 const StyledIconName: any = styled.p`
@@ -23,8 +22,18 @@ const StyledDetails: any = styled.div`
 `;
 
 const StyledItemsDiv: any = styled.div`
-    border: 2px solid yellow;
+    display: flex;
     height: 70%;
+`;
+
+const StyledOneItem: any = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60%;
+    width: 15%;
+    border: 1px solid black;
+    margin: 1%;
 `;
 
 const Item: React.FunctionComponent = () => {
@@ -38,8 +47,12 @@ const Item: React.FunctionComponent = () => {
                 <StyledIconName><FavoriteBorder />Add to favorites</StyledIconName>
             </StyledDiv>
             <StyledItemsDiv>
-                HERE WILL BE
-        </StyledItemsDiv>
+                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
+                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
+                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
+                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
+                <StyledOneItem ><p>tt</p><p>rr</p><p>ff</p></StyledOneItem>
+            </StyledItemsDiv>
         </div>
     );
 }

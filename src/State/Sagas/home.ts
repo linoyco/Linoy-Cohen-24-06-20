@@ -22,7 +22,6 @@ export function* watchAutocomplete() {
 function* fetchFiveDaysWeather(locationKey: string, fCMode: boolean) {
     try {
         const res = yield call(Api.fiveDaysRequest, locationKey, fCMode);
-        console.log('THE RESPONSE: ', res.data);
         yield put({ type: SAVE_FIVE_DAYS, fiveDaysWeather: res.data });
     }
     catch (error) {
