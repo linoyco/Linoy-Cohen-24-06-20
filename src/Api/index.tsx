@@ -12,7 +12,6 @@ const GEOLOCATION_URL = 'locations/v1/cities/geoposition/search';
 
 export const autocompleteRequest = (searchingBy: string) => {
     const url = `${AUTOCOMPLETE_URL}?apikey=${API_KEY}&q=${searchingBy}`;
-    console.log(url);
     return Axios.get(url);
 }
 
@@ -26,9 +25,8 @@ export const fiveDaysRequest = (searchWord: string, fCMode: boolean) => {
     let metric = null;
     if (fCMode === true) {
         metric = "&metric=true"
-        console.log(metric)
     }
-    const url = `${FIVE_DAYS_URL}${searchWord}?apikey=${API_KEY}`;
+    const url = `${FIVE_DAYS_URL}${searchWord}?apikey=${API_KEY}${metric}`;
     console.log(url);
     return Axios.get(url);
 }

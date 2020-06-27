@@ -1,10 +1,10 @@
 import {all} from 'redux-saga/effects';
 import { watchFetchWeather } from './app';
-import { watchSearchingBy } from './home';
+import { watchAutocomplete } from './home';
 
 export default function* rootSaga() {
 	yield all([
 		watchFetchWeather(),
-		watchSearchingBy()
+		watchAutocomplete()
 	]);
 }

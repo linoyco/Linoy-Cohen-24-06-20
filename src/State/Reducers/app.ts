@@ -1,9 +1,8 @@
 import produce from 'immer';
 import { SET_LOCATION, appActionType } from '../Actions/App/types';
-import { IAutocompleteOBJ, ICurrentWeatherOBJ, IFiveDaysWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
+import { ICurrentWeatherOBJ, IFiveDaysWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
 
 export interface IAppState {
-    autocompleteList: Array<IAutocompleteOBJ>,
     currentWeatherList: Array<ICurrentWeatherOBJ>,
     fiveDaysWeather: IFiveDaysWeatherOBJ,
     geolocationKey: IGeolocationKeyOBJ,
@@ -11,7 +10,6 @@ export interface IAppState {
 }
 
 const initialState: IAppState = {
-    autocompleteList: [],
     currentWeatherList: [],
     fiveDaysWeather: {
         Headline: {
