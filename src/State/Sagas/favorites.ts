@@ -7,13 +7,8 @@ function* fetchCurrentWeather(key: string) {
     try {
         yield put({ type: SET_ERROR_MESSAGE, errorMessage: '' });
 
-        const res = yield call(Api.currentWeatherRequest, key);
-        console.log(res.data);
-
-        const getLocationName = yield call(Api.fiveDaysRequest, key, true);
-        console.log('>>> ',getLocationName.data);
-
-
+        // const res = yield call(Api.currentWeatherRequest, key);
+        // console.log(res.data);
 
         // yield put({ type: SAVE_GEOLOCATION, geolocationKey: res.data });
     }

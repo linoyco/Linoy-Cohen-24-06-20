@@ -1,51 +1,34 @@
 import produce from 'immer';
-import { ICurrentWeatherOBJ } from '../../Api/apiObjects';
-import { favoritesActionType } from '../Actions/Favorites/types';
+import { favoritesActionType, SAVE_TO_FAVORITES_CLICKED, SAVE_FAVORITES_LIST } from '../Actions/Favorites/types';
+import { IFavoritesDetails } from '../../Containers/FavoritesPage';
 
 export interface IAppState {
-    favoritesDetails: {
-        id: number,
-        name: string,
-        currentWeather: ICurrentWeatherOBJ
-    }
+    favoritesDetailsList: Array<IFavoritesDetails>;
+    oneItem: IFavoritesDetails;
 }
 
 const initialState: IAppState = {
-    favoritesDetails: {
+    favoritesDetailsList: [],
+    oneItem: {
+        city: '',
         id: 0,
-        name: '',
-        currentWeather: {
-            LocalObservationDateTime: '',
-            EpochTime: 0,
-            WeatherText: '',
-            WeatherIcon: 0,
-            HasPrecipitation: false,
-            PrecipitationType: null,
-            IsDayTime: false,
-            Temperature: {
-                Metric: {
-                    Value: 0,
-                    Unit: '',
-                    UnitType: 0
-                },
-                Imperial: {
-                    Value: 0,
-                    Unit: '',
-                    UnitType: 0
-                }
-            },
-            MobileLink: '',
-            Link: ''
-        }
+        locationKey: '',
     }
 }
 
 export function favoritesReducer(state: IAppState = initialState, action: favoritesActionType) {
     return produce(state, draft => {
         switch (action.type) {
-            // case SET_LOCATION:
-            //     draft.locationDetails = action.locationDetails;
-            //     break;
+            case SAVE_TO_FAVORITES_CLICKED:
+                draft.oneItem = {
+                    city: action.city,
+                    locationKey: action.locationKey,
+                    id: draft.favoritesDetailsList.length
+                };
+                break;
+            case SAVE_FAVORITES_LIST:
+                draft.favoritesDetailsList = action.favoritesDetailsList;
+                break;
         }
     });
 }

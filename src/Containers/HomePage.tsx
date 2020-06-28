@@ -12,6 +12,8 @@ import moment from 'moment';
 import { Button } from '@material-ui/core';
 import { setLocation } from '../State/Actions/App';
 import * as commonValidator from '../Lib/commonValidator'
+import { saveToFavorites, saveFavoritesList } from '../State/Actions/Favorites';
+import { IFavoritesDetails } from './FavoritesPage';
 
 const StyledDiv: any = styled.div`
     margin-left: 1%;
@@ -67,17 +69,17 @@ const HomePage: React.FunctionComponent = () => {
     const [errorValidation, setErrorValidation] = React.useState('');
     const [localFiveDaysList, setLocalFiveDaysList] = React.useState<Array<fiveDaysCardDetails>>([]);
     const [localAutocompleteList, setLocalAutocompleteList] = React.useState<Array<{ city: string, key: string }>>([]);
+    const [localFavoritesList, setLocalFavoritesList] = React.useState<IFavoritesDetails[]>([]);
 
     const autocomplete: Array<IAutocompleteOBJ> = useSelector((state: any) => state.home.autocompleteList);
     const fiveDays: IFiveDaysWeatherOBJ = useSelector((state: any) => state.home.fiveDaysWeather);
     const localFCMode: boolean = useSelector((state: any) => state.home.fCMode);
     const localLocation = useSelector((state: any) => state.app.locationDetails);
+    const oneItemToList: IFavoritesDetails = useSelector((state: any) => state.favorites.oneItem);
 
     React.useEffect(() => {
         if (localLocation.locationKey !== '') {
-            dispatch(searchByCity(localLocation.locationKey, localFCMode));
-            console.log(localLocation.locationName);
-        }
+            dispatch(searchByCity(localLocation.locationKey, localFCMode));        }
     }, [localLocation.locationKey]);
 
     React.useEffect(() => {
@@ -95,6 +97,14 @@ const HomePage: React.FunctionComponent = () => {
     React.useEffect(() => {
         mapFiveDaysToList();
     }, [fiveDays]);
+
+    React.useEffect(() => {
+        let list: Array<IFavoritesDetails> = localFavoritesList;
+        list.push(oneItemToList);
+        // setLocalFavoritesList(list);
+        //save list
+        dispatch(saveFavoritesList(list));
+    }, [oneItemToList]);
 
     const mapFiveDaysToList = () => {
         let myList: Array<fiveDaysCardDetails> = [];
@@ -176,7 +186,7 @@ const HomePage: React.FunctionComponent = () => {
             </StyledSecDiv>
             <StyledSecDiv>
                 <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>
-                <StyledIconName><Button><FavoriteBorder /></Button>Add to favorites</StyledIconName>
+                <StyledIconName><Button onClick={() => dispatch(saveToFavorites(localLocation.locationKey, localLocation.locationName))}><FavoriteBorder /></Button>Add to favorites</StyledIconName>
             </StyledSecDiv>
             <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>
             <StyledItemsDiv>

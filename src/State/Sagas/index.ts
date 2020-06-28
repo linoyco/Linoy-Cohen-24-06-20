@@ -9,6 +9,6 @@ export default function* rootSaga() {
 		// watchFiveDaysWeather(),
 		// watchFCMode(),
 		// watchGeolocation(),
-		watchCurrentWeather()
+		// watchCurrentWeather()
 	]);
 }

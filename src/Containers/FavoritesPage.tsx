@@ -18,22 +18,24 @@ const StyledItemsDiv: any = styled.div`
     height: 80%;
 `;
 
-interface IFavoritesDetails {
-    locationName: string;
-    imageNumber: number;
-    tempFC: number;
-    iconName: string;
+export interface IFavoritesDetails {
+    city: string;
+    locationKey: string;
     id: number;
+    imageNumber?: number;
+    tempFC?: number;
+    iconName?: string;
 }
 
 const FavoritesPage: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
 
-    const [localFavoritesList, setLocalFavoritesList] = React.useState<Array<IFavoritesDetails>>([]);
-    
+
+    const localFavoritesList: IFavoritesDetails = useSelector((state: any) => state.favorites.favoritesDetailsList);
 
     React.useEffect(() => {
-        dispatch({ type: FETCH_CURRENT_WEATHER });
+        // dispatch({ type: FETCH_CURRENT_WEATHER });
+        console.log(localFavoritesList);
     });
 
     return (
