@@ -11,6 +11,8 @@ import { FavoriteBorder } from '@material-ui/icons';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
 import { setLocation } from '../State/Actions/App';
+import { Box } from "@material-ui/core";
+import * as commonValidator from '../Lib/commonValidator'
 
 const StyledDiv: any = styled.div`
     margin-left: 1%;
@@ -46,6 +48,12 @@ const StyledItemsDiv: any = styled.div`
     height: 80%;
 `;
 
+const StyledError: any = styled.p`
+	font-size: 12px;
+	color: red;
+    height: 12px;
+`;
+
 interface fiveDaysCardDetails {
     day: string;
     date: string;
@@ -58,6 +66,7 @@ const HomePage: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
 
     const [searchBy, setSearchBy] = React.useState('');
+    const [errorValidation, setErrorValidation] = React.useState('');
     const [localFiveDaysList, setLocalFiveDaysList] = React.useState<Array<fiveDaysCardDetails>>([]);
     const [localAutocompleteList, setLocalAutocompleteList] = React.useState<Array<{ city: string, key: string }>>([]);
 
@@ -130,6 +139,22 @@ const HomePage: React.FunctionComponent = () => {
         dispatch(searchByCity(value.key, localFCMode));
     }
 
+    const checkValidation = (value: string) => {
+        setSearchBy(value);
+        let isValide = true;
+        const userSchema = commonValidator.userSchema;
+        let error = '';
+
+        if (value) {
+            const searchObj = userSchema.search.validate(value);
+            if (searchObj.error) {
+                error = searchObj.error.message;
+                isValide = false;
+            }
+        }
+        (!isValide) ? setErrorValidation(error) : setErrorValidation('');
+    }
+
     return (
         <StyledDiv>
             <StyledSecDiv>
@@ -137,23 +162,26 @@ const HomePage: React.FunctionComponent = () => {
                     blurOnSelect
                     options={localAutocompleteList}
                     getOptionLabel={(option) => option.city}
-                    onSelect={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBy(e.target.value)}
+                    onSelect={(e: React.ChangeEvent<HTMLInputElement>) => checkValidation(e.target.value)}
                     onChange={(event: any, value) => {
                         if (value)
                             handleChangeAndSelect(value)
                     }}
-                    renderInput={(searchBy) => <TextField {...searchBy}
-                        label='Search City'
-                        value={searchBy}
-                        style={{ width: '300%' }}
-                    />}
+                    renderInput={(searchBy) => <div>
+                        <StyledError>{errorValidation}</StyledError>
+                        <TextField {...searchBy}
+                            label='Search City'
+                            value={searchBy}
+                            style={{ width: '300%', maxWidth: '300px' }}
+                        />
+                    </div>}
                 />
             </StyledSecDiv>
             <StyledSecDiv>
                 <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>
                 <StyledIconName><Button><FavoriteBorder /></Button>Add to favorites</StyledIconName>
             </StyledSecDiv>
-            <Button style={{marginLeft: '4%'}} onClick={() => handleFCMode()}>F\C</Button>
+            <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>
             <StyledItemsDiv>
                 {mapFiveDaysToCard()}
             </StyledItemsDiv>

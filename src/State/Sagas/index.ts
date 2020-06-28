@@ -4,9 +4,9 @@ import { watchAutocomplete, watchFiveDaysWeather, watchFCMode } from './home';
 
 export default function* rootSaga() {
 	yield all([
-		watchAutocomplete(),
-		watchFiveDaysWeather(),
-		watchFCMode(),
-		watchGeolocation()
+		// watchAutocomplete(),
+		// watchFiveDaysWeather(),
+		// watchFCMode(),
+		// watchGeolocation()
 	]);
 }

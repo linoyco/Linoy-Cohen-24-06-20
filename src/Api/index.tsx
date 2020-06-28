@@ -32,6 +32,7 @@ export const fiveDaysRequest = (city: string, fCMode: boolean) => {
     return Axios.get(url);
 }
 
+//Finish
 export const geolocationRequest = (lat: number, lon: number) => {
     const url = `${GEOLOCATION_URL}?apikey=${API_KEY}&q=${lat}%2C${lon}`;
     console.log(url);
