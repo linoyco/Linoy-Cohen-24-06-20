@@ -4,6 +4,7 @@ export const SET_LOCATION = 'SET_LOCATION';
 export const CHANGE_MODE = 'CHANGE_MODE';
 export const CURRENT_GEOLOCATION = 'CURRENT_GEOLOCATION';
 export const SAVE_GEOLOCATION = 'SAVE_GEOLOCATION';
+export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 
 export interface ISetLocation {
     type: typeof SET_LOCATION;
@@ -29,7 +30,13 @@ export interface ISaveGeolocation {
     geolocationKey: IGeolocationKeyOBJ;
 }
 
+export interface ISetErrorMessage {
+    type: typeof SET_ERROR_MESSAGE;
+    errorMessage: string;
+}
+
 export type appActionType = ISetLocation
     | IChangeMode
     | ICurrentGeolocation
-    | ISaveGeolocation;
+    | ISaveGeolocation
+    | ISetErrorMessage;

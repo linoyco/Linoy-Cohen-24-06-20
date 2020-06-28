@@ -11,7 +11,6 @@ import { FavoriteBorder } from '@material-ui/icons';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
 import { setLocation } from '../State/Actions/App';
-import { Box } from "@material-ui/core";
 import * as commonValidator from '../Lib/commonValidator'
 
 const StyledDiv: any = styled.div`

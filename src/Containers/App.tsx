@@ -44,12 +44,20 @@ const DivStyle: any = styled.div`
 
 const HeaderDiv: any = styled.header`
   width: 100%;
+  height: 10%
+`;
+
+const StyledError: any = styled.p`
+	font-size: 12px;
+	color: red;
+    height: 12px;
 `;
 
 const App: React.FunctionComponent = () => {
   const dispatch: Dispatch = useDispatch();
 
   const mode: string = useSelector((state: any) => state.app.mode);
+  const error: string = useSelector((state: any) => state.app.errorMessage);
 
   React.useEffect(() => {
     getGeolocation();
@@ -69,12 +77,15 @@ const App: React.FunctionComponent = () => {
     mode === 'light' ? dispatch(changeModeStyle('dark')) : dispatch(changeModeStyle('light'));
   }
 
+  const globalErr = (error ? <StyledError>{error}</StyledError> : null);
+
   return (
     <DivStyle>
       <GlobalStyles backgroundColor={mode === 'light' ? 'white' : '#4E5D89'} textColor={mode === 'light' ? 'black' : 'white'} />
       <HeaderDiv>
         <HeaderBar changeMode={changeMode} />
       </HeaderDiv>
+      {globalErr}
       <AppRoutes />
     </DivStyle>
   );

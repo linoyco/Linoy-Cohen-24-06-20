@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { SET_LOCATION, appActionType, CHANGE_MODE, SAVE_GEOLOCATION } from '../Actions/App/types';
+import { SET_LOCATION, appActionType, CHANGE_MODE, SAVE_GEOLOCATION, SET_ERROR_MESSAGE } from '../Actions/App/types';
 import { ICurrentWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
 
 export interface IAppState {
@@ -9,7 +9,8 @@ export interface IAppState {
         locationKey: string,
         locationName: string
     },
-    mode: string
+    mode: string,
+    errorMessage: string
 }
 
 const initialState: IAppState = {
@@ -73,6 +74,7 @@ const initialState: IAppState = {
         locationKey: ''
     },
     mode: 'light',
+    errorMessage: ''
 }
 
 export function appReducer(state: IAppState = initialState, action: appActionType) {
@@ -86,12 +88,13 @@ export function appReducer(state: IAppState = initialState, action: appActionTyp
                 break;
             case SAVE_GEOLOCATION:
                 draft.geolocationKey = action.geolocationKey;
-                console.log(draft.geolocationKey);
-                
                 draft.locationDetails = {
                     locationKey: action.geolocationKey.Key,
                     locationName: action.geolocationKey.AdministrativeArea.LocalizedName
-                }                
+                }
+                break;
+            case SET_ERROR_MESSAGE:
+                draft.errorMessage = action.errorMessage;
                 break;
         }
     });
