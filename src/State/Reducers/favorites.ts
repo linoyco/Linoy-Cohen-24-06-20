@@ -3,7 +3,6 @@ import { ICurrentWeatherOBJ } from '../../Api/apiObjects';
 import { favoritesActionType } from '../Actions/Favorites/types';
 
 export interface IAppState {
-    currentWeatherList: Array<ICurrentWeatherOBJ>,
     favoritesDetails: {
         id: number,
         name: string,
@@ -12,7 +11,6 @@ export interface IAppState {
 }
 
 const initialState: IAppState = {
-    currentWeatherList: [],
     favoritesDetails: {
         id: 0,
         name: '',

@@ -2,17 +2,18 @@ import React from 'react';
 import { CardMedia, Card, CardContent, CardHeader } from '@material-ui/core';
 
 interface IProps {
-    day: string;
-    date: string;
+    day?: string;
+    date?: string;
     imageNumber: number;
     iconName: string;
-    tempFC: string;
+    tempFC?: string;
+    locationName?: string;
 }
 
-const Item: React.FunctionComponent<IProps> = ({ day, date, imageNumber, iconName, tempFC }) => (
+const Item: React.FunctionComponent<IProps> = ({ day, date, imageNumber, iconName, tempFC, locationName }) => (
     <Card style={{ height: '85%', margin: '1%' }}>
         <CardHeader
-            title={day}
+            title={day || locationName}
             subheader={date}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
         />

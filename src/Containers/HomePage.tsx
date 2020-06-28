@@ -21,7 +21,6 @@ const StyledDiv: any = styled.div`
 `;
 
 const StyledSecDiv: any = styled.div`
-    display: flex;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -78,7 +77,6 @@ const HomePage: React.FunctionComponent = () => {
         if (localLocation.locationKey !== '') {
             dispatch(searchByCity(localLocation.locationKey, localFCMode));
             console.log(localLocation.locationName);
-
         }
     }, [localLocation.locationKey]);
 
