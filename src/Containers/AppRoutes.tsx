@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import * as Routes from "../Lib/Routes";
+import * as Routes from '../Lib/Routes';
 import HomePage from './HomePage';
 import FavoritesPage from './FavoritesPage';
 import HeaderBar from './HeaderBar';

@@ -1,4 +1,5 @@
 import produce from 'immer';
+
 import { SET_LOCATION, appActionType, CHANGE_MODE, SAVE_GEOLOCATION, SET_ERROR_MESSAGE } from '../Actions/App/types';
 import { ICurrentWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
 

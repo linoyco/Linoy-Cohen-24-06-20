@@ -1,6 +1,7 @@
 import React from 'react';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+
 import Item from '../Components/Item';
 
 const StyledDiv: any = styled.div`

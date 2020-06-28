@@ -1,14 +1,15 @@
 import React from 'react';
-import AppRoutes from './AppRoutes';
-import styled, { createGlobalStyle } from 'styled-components';
 import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
+import styled, { createGlobalStyle } from 'styled-components';
+
+import AppRoutes from './AppRoutes';
 import { currentGeolocation } from '../State/Actions/App';
 
 interface IPropsGlobalStyles {
   backgroundColor: string;
   textColor: string;
-};
+}
 
 const GlobalStyles: any = createGlobalStyle<IPropsGlobalStyles>`
   html{    

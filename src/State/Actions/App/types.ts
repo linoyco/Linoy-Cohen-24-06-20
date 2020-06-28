@@ -1,4 +1,4 @@
-import { IGeolocationKeyOBJ } from "../../../Api/apiObjects";
+import { IGeolocationKeyOBJ } from '../../../Api/apiObjects';
 
 export const SET_LOCATION = 'SET_LOCATION';
 export const CHANGE_MODE = 'CHANGE_MODE';

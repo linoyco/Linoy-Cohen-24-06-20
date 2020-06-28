@@ -1,4 +1,5 @@
 import { take, call, put } from 'redux-saga/effects';
+
 import * as Api from '../../Api';
 import { SAVE_TO_FAVORITES_LIST, SEND_TO_FAVORITES_CLICKED } from '../Actions/Favorites/types';
 import { SET_ERROR_MESSAGE } from '../Actions/App/types';

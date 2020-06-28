@@ -1,11 +1,12 @@
 import React from 'react';
+import { Dispatch } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Brightness4, Favorite, Home } from '@material-ui/icons';
 import { Button } from '@material-ui/core';
-import { useHistory } from "react-router-dom";
-import * as Routes from "../Lib/Routes";
-import { Dispatch } from 'redux';
-import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import * as Routes from '../Lib/Routes';
 import { changeModeStyle } from '../State/Actions/App';
 
 const StyledDiv: any = styled.div`

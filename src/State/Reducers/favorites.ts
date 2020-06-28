@@ -1,4 +1,5 @@
 import produce from 'immer';
+
 import { favoritesActionType, SAVE_TO_FAVORITES_LIST, SEND_REMOVE_FAVORITE } from '../Actions/Favorites/types';
 import { IFavoritesDetails } from '../../Containers/FavoritesPage';
 

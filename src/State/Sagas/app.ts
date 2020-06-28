@@ -1,4 +1,5 @@
 import { take, call, put } from 'redux-saga/effects';
+
 import { CURRENT_GEOLOCATION, SAVE_GEOLOCATION, SET_ERROR_MESSAGE } from '../Actions/App/types';
 import * as Api from '../../Api';
 

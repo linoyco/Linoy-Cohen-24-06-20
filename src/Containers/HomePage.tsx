@@ -1,17 +1,17 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
+import { FavoriteBorder, DeleteOutline } from '@material-ui/icons';
+import { Button, TextField } from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import styled from 'styled-components';
+import moment from 'moment';
+
 import Item from '../Components/Item';
 import { searchingBy, searchByCity, changeTempMode } from '../State/Actions/Home/index';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { IAutocompleteOBJ, IFiveDaysWeatherOBJ, IDailyForecastsOBJ } from '../Api/apiObjects';
-import { FavoriteBorder, DeleteOutline } from '@material-ui/icons';
-import moment from 'moment';
-import { Button } from '@material-ui/core';
+import { IAutocompleteOBJ, IFiveDaysWeatherOBJ } from '../Api/apiObjects';
 import { setLocation } from '../State/Actions/App';
-import * as commonValidator from '../Lib/commonValidator'
+import * as commonValidator from '../Lib/commonValidator';
 import { sendToFavorites, sendRemoveFavorite } from '../State/Actions/Favorites';
 import { IFavoritesDetails } from './FavoritesPage';
 
@@ -202,7 +202,6 @@ const HomePage: React.FunctionComponent = () => {
             <StyledSecDiv>
                 <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>
                 {favoriteButton}
-                {/* <StyledIconName><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder /></Button>Add to favorites</StyledIconName> */}
             </StyledSecDiv>
             <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>
             <StyledItemsDiv>
