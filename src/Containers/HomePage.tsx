@@ -106,7 +106,7 @@ const HomePage: React.FunctionComponent = () => {
             }
             else setIsFavorite(false);
         }
-    }, [localLocation.locationKey]);
+    }, [localLocation.locationKey, searchBy]);
 
     const mapFiveDaysToList = () => {
         let myList: Array<fiveDaysCardDetails> = [];
