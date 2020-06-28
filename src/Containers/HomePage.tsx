@@ -7,12 +7,12 @@ import Item from '../Components/Item';
 import { searchingBy, searchByCity, changeTempMode } from '../State/Actions/Home/index';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { IAutocompleteOBJ, IFiveDaysWeatherOBJ, IDailyForecastsOBJ } from '../Api/apiObjects';
-import { FavoriteBorder } from '@material-ui/icons';
+import { FavoriteBorder, DeleteOutline } from '@material-ui/icons';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
 import { setLocation } from '../State/Actions/App';
 import * as commonValidator from '../Lib/commonValidator'
-import { sendToFavorites, saveFavoritesList } from '../State/Actions/Favorites';
+import { sendToFavorites, sendRemoveFavorite } from '../State/Actions/Favorites';
 import { IFavoritesDetails } from './FavoritesPage';
 
 const StyledDiv: any = styled.div`
@@ -69,11 +69,13 @@ const HomePage: React.FunctionComponent = () => {
     const [errorValidation, setErrorValidation] = React.useState('');
     const [localFiveDaysList, setLocalFiveDaysList] = React.useState<Array<fiveDaysCardDetails>>([]);
     const [localAutocompleteList, setLocalAutocompleteList] = React.useState<Array<{ city: string, key: string }>>([]);
+    const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
 
     const autocomplete: Array<IAutocompleteOBJ> = useSelector((state: any) => state.home.autocompleteList);
     const fiveDays: IFiveDaysWeatherOBJ = useSelector((state: any) => state.home.fiveDaysWeather);
     const localFCMode: boolean = useSelector((state: any) => state.home.fCMode);
     const localLocation = useSelector((state: any) => state.app.locationDetails);
+    const localFavoritesList: Array<IFavoritesDetails> = useSelector((state: any) => state.favorites.favoritesDetailsList);
 
     React.useEffect(() => {
         if (localLocation.locationKey !== '') {
@@ -96,6 +98,15 @@ const HomePage: React.FunctionComponent = () => {
     React.useEffect(() => {
         mapFiveDaysToList();
     }, [fiveDays]);
+
+    React.useEffect(() => {
+        for (let value of localFavoritesList) {
+            if (value.locationKey === localLocation.locationKey) {
+                setIsFavorite(true);
+            }
+            else setIsFavorite(false);
+        }
+    }, [localLocation.locationKey]);
 
     const mapFiveDaysToList = () => {
         let myList: Array<fiveDaysCardDetails> = [];
@@ -153,6 +164,19 @@ const HomePage: React.FunctionComponent = () => {
         (!isValide) ? setErrorValidation(error) : setErrorValidation('');
     }
 
+    const handleAddFavoriteClicked = () => {
+        setIsFavorite(true);
+        dispatch(sendToFavorites(localLocation.locationKey, localLocation.locationName));
+    }
+
+    const handleRemoveFavoriteClicked = () => {
+        setIsFavorite(false);
+        dispatch(sendRemoveFavorite(localLocation.locationKey));
+    }
+
+    const favoriteButton = !isFavorite ? <StyledIconName><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder /></Button>Add to favorites</StyledIconName> :
+        <StyledIconName><Button onClick={() => handleRemoveFavoriteClicked()}><DeleteOutline /></Button>Remove from favorites</StyledIconName>;
+
     return (
         <StyledDiv>
             <StyledSecDiv>
@@ -177,7 +201,8 @@ const HomePage: React.FunctionComponent = () => {
             </StyledSecDiv>
             <StyledSecDiv>
                 <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>
-                <StyledIconName><Button onClick={() => dispatch(sendToFavorites(localLocation.locationKey, localLocation.locationName))}><FavoriteBorder /></Button>Add to favorites</StyledIconName>
+                {favoriteButton}
+                {/* <StyledIconName><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder /></Button>Add to favorites</StyledIconName> */}
             </StyledSecDiv>
             <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>
             <StyledItemsDiv>

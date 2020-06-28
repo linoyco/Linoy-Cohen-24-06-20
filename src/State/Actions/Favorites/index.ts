@@ -15,3 +15,10 @@ export function saveFavoritesList(oneFavorite: IFavoritesDetails): FavoritesActi
         oneFavorite: oneFavorite
     }
 }
+
+export function sendRemoveFavorite(locationKey: string): FavoritesActions.ISendRemoveFavorite {
+    return {
+        type: FavoritesActions.SEND_REMOVE_FAVORITE,
+        locationKey: locationKey
+    }
+}

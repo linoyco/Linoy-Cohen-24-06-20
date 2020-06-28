@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { homeActionType, SEARCHING_BY, SAVE_AUTOCOMPLETE_LIST, SAVE_FIVE_DAYS, CHANGE_TEMP_MODE, SET_TEMP_MODE } from '../Actions/Home/types';
+import { homeActionType, SEARCHING_BY, SAVE_AUTOCOMPLETE_LIST, SAVE_FIVE_DAYS, SET_TEMP_MODE } from '../Actions/Home/types';
 import { IAutocompleteOBJ, IFiveDaysWeatherOBJ } from '../../Api/apiObjects';
 
 export interface IHomeState {
@@ -7,6 +7,7 @@ export interface IHomeState {
     autocompleteList: Array<IAutocompleteOBJ>,
     fiveDaysWeather: IFiveDaysWeatherOBJ,
     fCMode: boolean;
+    isFavorite: boolean;
 }
 
 const initialState: IHomeState = {
@@ -25,7 +26,8 @@ const initialState: IHomeState = {
             Link: ''
         }, DailyForecasts: []
     },
-    fCMode: true
+    fCMode: true,
+    isFavorite: false
 }
 
 export function homeReducer(state: IHomeState = initialState, action: homeActionType) {
