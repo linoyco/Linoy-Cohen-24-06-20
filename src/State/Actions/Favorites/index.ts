@@ -1,17 +1,17 @@
 import * as FavoritesActions from './types';
 import { IFavoritesDetails } from '../../../Containers/FavoritesPage';
 
-export function saveToFavorites(locationKey: string, city: string): FavoritesActions.ISaveToFavoritesClicked {
+export function sendToFavorites(locationKey: string, city: string): FavoritesActions.ISendToFavoritesClicked {
     return {
-        type: FavoritesActions.SAVE_TO_FAVORITES_CLICKED,
+        type: FavoritesActions.SEND_TO_FAVORITES_CLICKED,
         locationKey: locationKey,
         city: city
     }
 }
 
-export function saveFavoritesList(favoritesDetailsList: Array<IFavoritesDetails>): FavoritesActions.ISaveFavoritesList {
+export function saveFavoritesList(oneFavorite: IFavoritesDetails): FavoritesActions.ISaveToFavoritesList {
     return {
-        type: FavoritesActions.SAVE_FAVORITES_LIST,
-        favoritesDetailsList: favoritesDetailsList
+        type: FavoritesActions.SAVE_TO_FAVORITES_LIST,
+        oneFavorite: oneFavorite
     }
 }

@@ -1,22 +1,24 @@
 import { take, call, put } from 'redux-saga/effects';
 import * as Api from '../../Api';
-import { FETCH_CURRENT_WEATHER, SAVE_FAVORITES_LIST } from '../Actions/Favorites/types';
+import { SAVE_TO_FAVORITES_LIST, SEND_TO_FAVORITES_CLICKED } from '../Actions/Favorites/types';
 import { SET_ERROR_MESSAGE } from '../Actions/App/types';
 import { IFavoritesDetails } from '../../Containers/FavoritesPage';
 
-function* fetchCurrentWeather(favoritesDetailsList: Array<IFavoritesDetails>) {
+function* fetchCurrentWeather(city: string, locationKey: string) {
     try {
         yield put({ type: SET_ERROR_MESSAGE, errorMessage: '' });
 
-        for (let value of favoritesDetailsList) {
-            if (value.locationKey !== '') {
-                const res = yield call(Api.currentWeatherRequest, value.locationKey);
-                value.iconName = res.data[0].WeatherText;
-                value.imageNumber = res.data[0].WeatherIcon;
-                value.tempFC = res.data[0].Temperature.Metric.Value;
-            }
+
+        const res = yield call(Api.currentWeatherRequest, locationKey);
+
+        const oneFavorite: IFavoritesDetails = {
+            city: city,
+            locationKey: locationKey,
+            iconName: res.data[0].WeatherText,
+            imageNumber: res.data[0].WeatherIcon,
+            tempFC: res.data[0].Temperature.Metric.Value
         }
-        yield put({ type: SAVE_FAVORITES_LIST, favoritesDetailsList: favoritesDetailsList });
+        yield put({ type: SAVE_TO_FAVORITES_LIST, oneFavorite: oneFavorite });
     }
     catch (error) {
         yield put({ type: SET_ERROR_MESSAGE, errorMessage: error.message });
@@ -25,8 +27,7 @@ function* fetchCurrentWeather(favoritesDetailsList: Array<IFavoritesDetails>) {
 
 export function* watchCurrentWeather() {
     while (true) {
-        const { favoritesDetailsList } = yield take(FETCH_CURRENT_WEATHER);
-        // const key = '215854';
-        yield call(fetchCurrentWeather, favoritesDetailsList);
+        const { city, locationKey } = yield take(SEND_TO_FAVORITES_CLICKED);
+        yield call(fetchCurrentWeather, city, locationKey);
     }
 };

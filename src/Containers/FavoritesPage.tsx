@@ -3,7 +3,6 @@ import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Item from '../Components/Item';
-import { FETCH_CURRENT_WEATHER } from '../State/Actions/Favorites/types';
 
 const StyledDiv: any = styled.div`
     margin-left: 1%;
@@ -21,10 +20,9 @@ const StyledItemsDiv: any = styled.div`
 export interface IFavoritesDetails {
     city: string;
     locationKey: string;
-    id: number;
-    imageNumber?: number;
-    tempFC?: number;
-    iconName?: string;
+    imageNumber: number;
+    tempFC: number;
+    iconName: string;
 }
 
 const FavoritesPage: React.FunctionComponent = () => {
@@ -33,8 +31,8 @@ const FavoritesPage: React.FunctionComponent = () => {
     const localFavoritesList: Array<IFavoritesDetails> = useSelector((state: any) => state.favorites.favoritesDetailsList);
 
     React.useEffect(() => {
-        dispatch({ type: FETCH_CURRENT_WEATHER, favoritesDetailsList: localFavoritesList });
-    }, []);
+        console.log(localFavoritesList);
+    });
 
     return (
         <StyledDiv>
