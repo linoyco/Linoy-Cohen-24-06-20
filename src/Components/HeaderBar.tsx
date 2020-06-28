@@ -32,15 +32,17 @@ const StyledDivIcons: any = styled.div`
 
 interface IProps {
     changeMode: () => void;
+    onClickHome: any;
+    onClickFavorites: any;
 }
 
-const HeaderBar: React.FunctionComponent<IProps> = ({ changeMode }) => (
+const HeaderBar: React.FunctionComponent<IProps> = ({ changeMode, onClickHome, onClickFavorites }) => (
     <StyledDiv>
         <StyledTitle>National Current Weather</StyledTitle>
         <StyledDivIcons>
             <StyledIconName><Button onClick={changeMode} style={{ color: 'white' }}><Brightness4 /></Button>Mode</StyledIconName>
-            <StyledIconName><Button style={{ color: 'white' }}><Favorite /></Button>Favorites</StyledIconName>
-            <StyledIconName><Button style={{ color: 'white' }}><Home /></Button>Home</StyledIconName>
+            <StyledIconName><Button onClick={() => onClickFavorites()} style={{ color: 'white' }}><Favorite /></Button>Favorites</StyledIconName>
+            <StyledIconName><Button onClick={() => onClickHome()} style={{ color: 'white' }}><Home /></Button>Home</StyledIconName>
         </StyledDivIcons>
     </StyledDiv>
 );

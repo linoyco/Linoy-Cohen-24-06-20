@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import * as Routes from "../Lib/Routes";
 import HomePage from './HomePage';
 import FavoritesPage from './FavoritesPage';
-
-const HOME = '/';
-const FAVORITES = '/favorites';
+import HeaderBar from '../Components/HeaderBar';
 
 const AppRoutes: React.FunctionComponent = () => (
     <Router>
         <Switch>
-            <Route exact path={HOME} component={HomePage} />
-            <Route path={FAVORITES} component={FavoritesPage} />
+            {/* <HeaderBar/> */}
+            <Route exact path={Routes.HOME} component={HomePage} />
+            <Route path={Routes.FAVORITES} component={FavoritesPage} />
         </Switch>
     </Router>
 );
