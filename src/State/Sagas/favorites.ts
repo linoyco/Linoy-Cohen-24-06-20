@@ -1,16 +1,22 @@
 import { take, call, put } from 'redux-saga/effects';
 import * as Api from '../../Api';
-import { FETCH_CURRENT_WEATHER } from '../Actions/Favorites/types';
+import { FETCH_CURRENT_WEATHER, SAVE_FAVORITES_LIST } from '../Actions/Favorites/types';
 import { SET_ERROR_MESSAGE } from '../Actions/App/types';
+import { IFavoritesDetails } from '../../Containers/FavoritesPage';
 
-function* fetchCurrentWeather(key: string) {
+function* fetchCurrentWeather(favoritesDetailsList: Array<IFavoritesDetails>) {
     try {
         yield put({ type: SET_ERROR_MESSAGE, errorMessage: '' });
 
-        // const res = yield call(Api.currentWeatherRequest, key);
-        // console.log(res.data);
-
-        // yield put({ type: SAVE_GEOLOCATION, geolocationKey: res.data });
+        for (let value of favoritesDetailsList) {
+            if (value.locationKey !== '') {
+                const res = yield call(Api.currentWeatherRequest, value.locationKey);
+                value.iconName = res.data[0].WeatherText;
+                value.imageNumber = res.data[0].WeatherIcon;
+                value.tempFC = res.data[0].Temperature.Metric.Value;
+            }
+        }
+        yield put({ type: SAVE_FAVORITES_LIST, favoritesDetailsList: favoritesDetailsList });
     }
     catch (error) {
         yield put({ type: SET_ERROR_MESSAGE, errorMessage: error.message });
@@ -19,8 +25,8 @@ function* fetchCurrentWeather(key: string) {
 
 export function* watchCurrentWeather() {
     while (true) {
-        yield take(FETCH_CURRENT_WEATHER);
-        const key = '215854';
-        yield call(fetchCurrentWeather, key);
+        const { favoritesDetailsList } = yield take(FETCH_CURRENT_WEATHER);
+        // const key = '215854';
+        yield call(fetchCurrentWeather, favoritesDetailsList);
     }
 };

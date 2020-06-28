@@ -6,6 +6,7 @@ export const SAVE_FAVORITES_LIST = 'SAVE_FAVORITES_LIST';
 
 export interface IFetchCurrentWeather {
     type: typeof FETCH_CURRENT_WEATHER;
+    favoritesDetailsList: Array<IFavoritesDetails>;
 }
 
 export interface ISaveToFavoritesClicked {

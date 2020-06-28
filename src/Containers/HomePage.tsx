@@ -69,7 +69,6 @@ const HomePage: React.FunctionComponent = () => {
     const [errorValidation, setErrorValidation] = React.useState('');
     const [localFiveDaysList, setLocalFiveDaysList] = React.useState<Array<fiveDaysCardDetails>>([]);
     const [localAutocompleteList, setLocalAutocompleteList] = React.useState<Array<{ city: string, key: string }>>([]);
-    const [localFavoritesList, setLocalFavoritesList] = React.useState<IFavoritesDetails[]>([]);
 
     const autocomplete: Array<IAutocompleteOBJ> = useSelector((state: any) => state.home.autocompleteList);
     const fiveDays: IFiveDaysWeatherOBJ = useSelector((state: any) => state.home.fiveDaysWeather);
@@ -99,10 +98,8 @@ const HomePage: React.FunctionComponent = () => {
     }, [fiveDays]);
 
     React.useEffect(() => {
-        let list: Array<IFavoritesDetails> = localFavoritesList;
+        let list: Array<IFavoritesDetails> = [];
         list.push(oneItemToList);
-        // setLocalFavoritesList(list);
-        //save list
         dispatch(saveFavoritesList(list));
     }, [oneItemToList]);
 

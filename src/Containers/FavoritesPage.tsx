@@ -30,13 +30,11 @@ export interface IFavoritesDetails {
 const FavoritesPage: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
 
-
-    const localFavoritesList: IFavoritesDetails = useSelector((state: any) => state.favorites.favoritesDetailsList);
+    const localFavoritesList: Array<IFavoritesDetails> = useSelector((state: any) => state.favorites.favoritesDetailsList);
 
     React.useEffect(() => {
-        // dispatch({ type: FETCH_CURRENT_WEATHER });
-        console.log(localFavoritesList);
-    });
+        dispatch({ type: FETCH_CURRENT_WEATHER, favoritesDetailsList: localFavoritesList });
+    }, []);
 
     return (
         <StyledDiv>
