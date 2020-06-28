@@ -1,12 +1,9 @@
 import React from 'react';
 import AppRoutes from './AppRoutes';
 import styled, { createGlobalStyle } from 'styled-components';
-import HeaderBar from '../Components/HeaderBar';
 import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeModeStyle, currentGeolocation } from '../State/Actions/App';
-import { useHistory } from "react-router-dom";
-import * as Routes from "../Lib/Routes";
+import { currentGeolocation } from '../State/Actions/App';
 
 interface IPropsGlobalStyles {
   backgroundColor: string;
@@ -74,31 +71,14 @@ const App: React.FunctionComponent = () => {
     });
   }
 
-  const changeMode = () => {
-    mode === 'light' ? dispatch(changeModeStyle('dark')) : dispatch(changeModeStyle('light'));
-  }
-
   const globalErr = (error ? <StyledError>{error}</StyledError> : null);
-
-  const history = useHistory();
-
-  const navigateToFavorites = () => {
-    history.push('/favorites');
-  }
-
-  const navigateToHome = () => {
-    history.push(Routes.HOME);
-  }
 
   return (
     <DivStyle>
-      <GlobalStyles backgroundColor={mode === 'light' ? 'white' : '#4E5D89'} textColor={mode === 'light' ? 'black' : 'white'} />
+      <GlobalStyles
+        backgroundColor={mode === 'light' ? 'white' : '#4E5D89'}
+        textColor={mode === 'light' ? 'black' : 'white'} />
       <HeaderDiv>
-        <HeaderBar
-          changeMode={changeMode}
-          onClickFavorites={navigateToFavorites}
-          onClickHome={navigateToHome}
-        />
       </HeaderDiv>
       {globalErr}
       <AppRoutes />
