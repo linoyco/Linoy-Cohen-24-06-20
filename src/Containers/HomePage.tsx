@@ -67,6 +67,14 @@ const HomePage: React.FunctionComponent = () => {
     const localLocation = useSelector((state: any) => state.app.locationDetails);
 
     React.useEffect(() => {
+        if (localLocation.locationKey !== '') {
+            dispatch(searchByCity(localLocation.locationKey, localFCMode));
+            console.log(localLocation.locationName);
+
+        }
+    }, [localLocation.locationKey]);
+
+    React.useEffect(() => {
         dispatch(searchingBy(searchBy));
     }, [searchBy]);
 
@@ -142,10 +150,10 @@ const HomePage: React.FunctionComponent = () => {
                 />
             </StyledSecDiv>
             <StyledSecDiv>
-                <StyledDetails><p>{localLocation.locationName}<br /></p></StyledDetails>
+                <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>
                 <StyledIconName><Button><FavoriteBorder /></Button>Add to favorites</StyledIconName>
             </StyledSecDiv>
-            <Button onClick={() => handleFCMode()}>F\C</Button>
+            <Button style={{marginLeft: '4%'}} onClick={() => handleFCMode()}>F\C</Button>
             <StyledItemsDiv>
                 {mapFiveDaysToCard()}
             </StyledItemsDiv>

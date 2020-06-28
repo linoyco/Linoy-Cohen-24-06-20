@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import AppRoutes from './AppRoutes';
 import styled, { createGlobalStyle } from 'styled-components';
 import HeaderBar from '../Components/HeaderBar';
 import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeModeStyle, setLocation } from '../State/Actions/App';
-import { searchByCity } from '../State/Actions/Home';
+import { changeModeStyle, currentGeolocation } from '../State/Actions/App';
 
 interface IPropsGlobalStyles {
   backgroundColor: string;
@@ -51,19 +50,16 @@ const App: React.FunctionComponent = () => {
   const dispatch: Dispatch = useDispatch();
 
   const mode: string = useSelector((state: any) => state.app.mode);
-  const localFCMode: boolean = useSelector((state: any) => state.home.fCMode);
 
-  useEffect(() => {
+  React.useEffect(() => {
     getGeolocation();
-    dispatch(setLocation('215854', 'Tel Aviv'));
-    dispatch(searchByCity('215854', localFCMode));
   }, []);
 
   const getGeolocation = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
-      const latitude = position.coords.latitude
-      const longitude = position.coords.longitude
-      console.log(latitude, longitude);
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      dispatch(currentGeolocation(lat, lon));
     }, function (err) {
       console.log(err);
     });

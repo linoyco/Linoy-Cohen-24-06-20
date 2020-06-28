@@ -16,3 +16,11 @@ export function changeModeStyle(mode: string): AppActions.IChangeMode {
         mode: mode
     }
 }
+
+export function currentGeolocation(lat: number, lon: number): AppActions.ICurrentGeolocation {
+    return {
+        type: AppActions.CURRENT_GEOLOCATION,
+        lat: lat,
+        lon: lon
+    }
+}

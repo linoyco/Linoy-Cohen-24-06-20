@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { SET_LOCATION, appActionType, CHANGE_MODE } from '../Actions/App/types';
+import { SET_LOCATION, appActionType, CHANGE_MODE, SAVE_GEOLOCATION } from '../Actions/App/types';
 import { ICurrentWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
 
 export interface IAppState {
@@ -83,6 +83,15 @@ export function appReducer(state: IAppState = initialState, action: appActionTyp
                 break;
             case CHANGE_MODE:
                 draft.mode = action.mode;
+                break;
+            case SAVE_GEOLOCATION:
+                draft.geolocationKey = action.geolocationKey;
+                console.log(draft.geolocationKey);
+                
+                draft.locationDetails = {
+                    locationKey: action.geolocationKey.Key,
+                    locationName: action.geolocationKey.AdministrativeArea.LocalizedName
+                }                
                 break;
         }
     });
