@@ -3,7 +3,10 @@ export const CHANGE_MODE = 'CHANGE_MODE';
 
 export interface ISetLocation {
     type: typeof SET_LOCATION;
-    location: string;
+    locationDetails: {
+        locationKey: string,
+        locationName: string
+    }
 }
 
 export interface IChangeMode {

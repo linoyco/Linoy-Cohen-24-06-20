@@ -10,6 +10,7 @@ import { IAutocompleteOBJ, IFiveDaysWeatherOBJ, IDailyForecastsOBJ } from '../Ap
 import { FavoriteBorder } from '@material-ui/icons';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
+import { setLocation } from '../State/Actions/App';
 
 const StyledDiv: any = styled.div`
     margin-left: 1%;
@@ -20,8 +21,11 @@ const StyledDiv: any = styled.div`
 
 const StyledSecDiv: any = styled.div`
     display: flex;
-    height: 30%;
-    margin-top: 1%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+    height: 20%;
 `;
 
 const StyledIconName: any = styled.p`
@@ -60,7 +64,7 @@ const HomePage: React.FunctionComponent = () => {
     const autocomplete: Array<IAutocompleteOBJ> = useSelector((state: any) => state.home.autocompleteList);
     const fiveDays: IFiveDaysWeatherOBJ = useSelector((state: any) => state.home.fiveDaysWeather);
     const localFCMode: boolean = useSelector((state: any) => state.home.fCMode);
-    const globalLocationKey: string = useSelector((state: any) => state.app.locationKey);
+    const localLocation = useSelector((state: any) => state.app.locationDetails);
 
     React.useEffect(() => {
         dispatch(searchingBy(searchBy));
@@ -77,23 +81,6 @@ const HomePage: React.FunctionComponent = () => {
     React.useEffect(() => {
         mapFiveDaysToList();
     }, [fiveDays]);
-
-    const handleSelectCity = (e: string) => {
-        setSearchBy(e);
-
-        // for (let i of localAutocompleteList) {
-        //     if (e === i.city) {
-        //         locationKey = i.key;
-        //         console.log(i.key);
-
-        //     } else {
-        //         return;
-        //     }
-        // }
-        //call action 5 days
-
-        dispatch(searchByCity(globalLocationKey, localFCMode));
-    }
 
     const mapFiveDaysToList = () => {
         let myList: Array<fiveDaysCardDetails> = [];
@@ -127,25 +114,37 @@ const HomePage: React.FunctionComponent = () => {
     }
 
     const handleFCMode = () => {
-        localFCMode ? dispatch(changeTempMode(globalLocationKey, false)) : dispatch(changeTempMode(globalLocationKey, true));
+        localFCMode ? dispatch(changeTempMode(localLocation.locationKey, false)) : dispatch(changeTempMode(localLocation.locationKey, true));
+    }
+
+    const handleChangeAndSelect = (value: { city: string, key: string }) => {
+        //לבדוק שליחה של עיר שהיא לא תא
+        console.log(value.city, value.key);
+        dispatch(searchByCity(value.key, localFCMode));
     }
 
     return (
         <StyledDiv>
-            <Autocomplete
-                options={localAutocompleteList}
-                getOptionLabel={(option) => option.city}
-                onSelect={(e: React.ChangeEvent<HTMLInputElement>) => handleSelectCity(e.target.value)}
-                renderInput={(searchBy) => <TextField {...searchBy}
-                    label='Search City'
-                    value={searchBy}
-                    style={{ width: '30%' }}
-                // onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBy(e.target.value)}
-                />}
-            />
             <StyledSecDiv>
-                <StyledDetails><p>{'DefaultLocation'}<br />Temp</p></StyledDetails>
-                <StyledIconName><FavoriteBorder />Add to favorites</StyledIconName>
+                <Autocomplete
+                    blurOnSelect
+                    options={localAutocompleteList}
+                    getOptionLabel={(option) => option.city}
+                    onSelect={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBy(e.target.value)}
+                    onChange={(event: any, value) => {
+                        if (value)
+                            handleChangeAndSelect(value)
+                    }}
+                    renderInput={(searchBy) => <TextField {...searchBy}
+                        label='Search City'
+                        value={searchBy}
+                        style={{ width: '300%' }}
+                    />}
+                />
+            </StyledSecDiv>
+            <StyledSecDiv>
+                <StyledDetails><p>{localLocation.locationName}<br /></p></StyledDetails>
+                <StyledIconName><Button><FavoriteBorder /></Button>Add to favorites</StyledIconName>
             </StyledSecDiv>
             <Button onClick={() => handleFCMode()}>F\C</Button>
             <StyledItemsDiv>

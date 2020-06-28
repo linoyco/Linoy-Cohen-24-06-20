@@ -4,8 +4,8 @@ import * as Api from '../../Api';
 
 function* fetchAutocomplete(searchingBy: string) {
     try {
-        // const res = yield call(Api.autocompleteRequest, searchingBy);
-        // yield put({ type: SAVE_AUTOCOMPLETE_LIST, autocompleteList: res.data });
+        const res = yield call(Api.autocompleteRequest, searchingBy);
+        yield put({ type: SAVE_AUTOCOMPLETE_LIST, autocompleteList: res.data });
     }
     catch (error) {
         console.log(error);
@@ -23,6 +23,8 @@ function* fetchFiveDaysWeather(locationKey: string, fCMode: boolean) {
     try {
         const res = yield call(Api.fiveDaysRequest, locationKey, fCMode);
         yield put({ type: SAVE_FIVE_DAYS, fiveDaysWeather: res.data });
+        console.log(res.data);
+        
     }
     catch (error) {
         console.log(error.message);

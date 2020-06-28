@@ -5,8 +5,10 @@ import { ICurrentWeatherOBJ, IGeolocationKeyOBJ } from '../../Api/apiObjects';
 export interface IAppState {
     currentWeatherList: Array<ICurrentWeatherOBJ>,
     geolocationKey: IGeolocationKeyOBJ,
-    locationKey: string,
-    location: string,
+    locationDetails: {
+        locationKey: string,
+        locationName: string
+    },
     mode: string
 }
 
@@ -66,16 +68,18 @@ const initialState: IAppState = {
         SupplementalAdminAreas: [],
         DataSets: []
     },
-    location: '',
+    locationDetails: {
+        locationName: 'Tel Aviv',
+        locationKey: '215854'
+    },
     mode: 'light',
-    locationKey: '215854'
 }
 
 export function appReducer(state: IAppState = initialState, action: appActionType) {
     return produce(state, draft => {
         switch (action.type) {
             case SET_LOCATION:
-                draft.location = action.location;
+                draft.locationDetails = action.locationDetails;
                 break;
             case CHANGE_MODE:
                 draft.mode = action.mode;
