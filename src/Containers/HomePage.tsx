@@ -118,8 +118,7 @@ const HomePage: React.FunctionComponent = () => {
     }
 
     const handleChangeAndSelect = (value: { city: string, key: string }) => {
-        //לבדוק שליחה של עיר שהיא לא תא
-        console.log(value.city, value.key);
+        dispatch(setLocation(value.key, value.city));
         dispatch(searchByCity(value.key, localFCMode));
     }
 

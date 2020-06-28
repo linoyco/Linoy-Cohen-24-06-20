@@ -69,8 +69,8 @@ const initialState: IAppState = {
         DataSets: []
     },
     locationDetails: {
-        locationName: 'Tel Aviv',
-        locationKey: '215854'
+        locationName: '',
+        locationKey: ''
     },
     mode: 'light',
 }
