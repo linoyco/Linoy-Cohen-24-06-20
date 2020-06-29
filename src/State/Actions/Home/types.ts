@@ -6,6 +6,7 @@ export const FIVE_DAYS_REQUEST = 'FIVE_DAYS_REQUEST';
 export const SAVE_FIVE_DAYS = 'SAVE_FIVE_DAYS';
 export const CHANGE_TEMP_MODE = 'CHANGE_TEMP_MODE';
 export const SET_TEMP_MODE = 'SET_TEMP_MODE';
+export const SET_IS_FAVORITE = 'SET_IS_FAVORITE';
 
 export interface ISearchingBy {
     type: typeof SEARCHING_BY;
@@ -39,9 +40,15 @@ export interface ISetTempMode {
     fCMode: boolean;
 }
 
+export interface ISetIsFavorite {
+    type: typeof SET_IS_FAVORITE;
+    isFavorite: boolean;
+}
+
 export type homeActionType = ISearchingBy
     | ISaveAutocompleteList
     | IFiveDaysRequest
     | ISaveFiveDays
     | IChangeTempMode
-    | ISetTempMode;
+    | ISetTempMode
+    | ISetIsFavorite;

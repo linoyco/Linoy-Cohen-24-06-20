@@ -22,3 +22,10 @@ export function changeTempMode(locationKey: string, fCMode: boolean): HomeAction
         locationKey: locationKey
     }
 }
+
+export function setIsFavorite(isFavorite: boolean): HomeActions.ISetIsFavorite {
+    return {
+        type: HomeActions.SET_IS_FAVORITE,
+        isFavorite: isFavorite
+    }
+}

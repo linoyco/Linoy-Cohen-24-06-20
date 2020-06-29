@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { homeActionType, SEARCHING_BY, SAVE_AUTOCOMPLETE_LIST, SAVE_FIVE_DAYS, SET_TEMP_MODE } from '../Actions/Home/types';
+import { homeActionType, SEARCHING_BY, SAVE_AUTOCOMPLETE_LIST, SAVE_FIVE_DAYS, SET_TEMP_MODE, SET_IS_FAVORITE } from '../Actions/Home/types';
 import { IAutocompleteOBJ, IFiveDaysWeatherOBJ } from '../../Api/apiObjects';
 
 export interface IHomeState {
@@ -45,6 +45,9 @@ export function homeReducer(state: IHomeState = initialState, action: homeAction
                 break;
             case SET_TEMP_MODE:
                 draft.fCMode = action.fCMode;
+                break;
+            case SET_IS_FAVORITE:
+                draft.isFavorite = action.isFavorite;
                 break;
         }
     });

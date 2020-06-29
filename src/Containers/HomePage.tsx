@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 import Item from '../Components/Item';
-import { searchingBy, searchByCity, changeTempMode } from '../State/Actions/Home/index';
+import { searchingBy, searchByCity, changeTempMode, setIsFavorite } from '../State/Actions/Home/index';
 import { IAutocompleteOBJ, IFiveDaysWeatherOBJ } from '../Api/apiObjects';
 import { setLocation } from '../State/Actions/App';
 import * as commonValidator from '../Lib/commonValidator';
@@ -69,13 +69,13 @@ const HomePage: React.FunctionComponent = () => {
     const [errorValidation, setErrorValidation] = React.useState('');
     const [localFiveDaysList, setLocalFiveDaysList] = React.useState<Array<fiveDaysCardDetails>>([]);
     const [localAutocompleteList, setLocalAutocompleteList] = React.useState<Array<{ city: string, key: string }>>([]);
-    const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
 
     const autocomplete: Array<IAutocompleteOBJ> = useSelector((state: any) => state.home.autocompleteList);
     const fiveDays: IFiveDaysWeatherOBJ = useSelector((state: any) => state.home.fiveDaysWeather);
     const localFCMode: boolean = useSelector((state: any) => state.home.fCMode);
     const localLocation = useSelector((state: any) => state.app.locationDetails);
     const localFavoritesList: Array<IFavoritesDetails> = useSelector((state: any) => state.favorites.favoritesDetailsList);
+    const isFavorite: boolean = useSelector((state: any) => state.home.isFavorite);
 
     React.useEffect(() => {
         if (localLocation.locationKey !== '') {
@@ -102,11 +102,22 @@ const HomePage: React.FunctionComponent = () => {
     React.useEffect(() => {
         for (let value of localFavoritesList) {
             if (value.locationKey === localLocation.locationKey) {
-                setIsFavorite(true);
+                console.log(value.locationKey, localLocation.locationKey);
+
+                dispatch(setIsFavorite(true));
             }
-            else setIsFavorite(false);
+            else dispatch(setIsFavorite(false));
         }
-    }, [localLocation.locationKey, searchBy]);
+    }, []);
+
+    const checkIfFavorite = (value: string) => {
+        localFavoritesList.map(favorite => {
+            if (value === favorite.locationKey) {
+                dispatch(setIsFavorite(true));
+            }
+            else dispatch(setIsFavorite(false));
+        });
+    }
 
     const mapFiveDaysToList = () => {
         let myList: Array<fiveDaysCardDetails> = [];
@@ -165,12 +176,12 @@ const HomePage: React.FunctionComponent = () => {
     }
 
     const handleAddFavoriteClicked = () => {
-        setIsFavorite(true);
+        dispatch(setIsFavorite(true));
         dispatch(sendToFavorites(localLocation.locationKey, localLocation.locationName));
     }
 
     const handleRemoveFavoriteClicked = () => {
-        setIsFavorite(false);
+        dispatch(setIsFavorite(false));
         dispatch(sendRemoveFavorite(localLocation.locationKey));
     }
 
@@ -186,8 +197,14 @@ const HomePage: React.FunctionComponent = () => {
                     getOptionLabel={(option) => option.city}
                     onSelect={(e: React.ChangeEvent<HTMLInputElement>) => checkValidation(e.target.value)}
                     onChange={(event: any, value) => {
-                        if (value)
-                            handleChangeAndSelect(value)
+                        if (value) {
+                            handleChangeAndSelect(value);
+                            checkIfFavorite(value.key);
+                            for (let i = 0; i < localFavoritesList.length; i++) {
+                                value.city === localFavoritesList[i].city ?
+                                    dispatch(setIsFavorite(true)) : dispatch(setIsFavorite(false));
+                            }
+                        }
                     }}
                     renderInput={(searchBy) => <div>
                         <StyledError>{errorValidation}</StyledError>
