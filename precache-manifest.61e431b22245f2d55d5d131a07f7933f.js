@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "536ccbb6db3079e2a93bc618ec878632",
+    "revision": "008df618be003e48adba64ce12f294fb",
     "url": "/Linoy-Cohen-24-06-20/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Linoy-Cohen-24-06-20/static/js/2.274102e4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dd6d2f683cce5b6e5b4c",
-    "url": "/Linoy-Cohen-24-06-20/static/js/main.3aafbf72.chunk.js"
+    "revision": "37fbd3fd2ea77d7f530e",
+    "url": "/Linoy-Cohen-24-06-20/static/js/main.385481e6.chunk.js"
   },
   {
     "revision": "108dd8856dda235134e6",

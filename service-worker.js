@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Linoy-Cohen-24-06-20/precache-manifest.e05f7198e6c88c112ce6f46900811ed9.js"
+  "/Linoy-Cohen-24-06-20/precache-manifest.61e431b22245f2d55d5d131a07f7933f.js"
 );
 
 self.addEventListener('message', (event) => {
