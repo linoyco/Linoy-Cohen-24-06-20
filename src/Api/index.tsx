@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Axios = axios.create({
-    baseURL: 'http://dataservice.accuweather.com'
+    baseURL: 'https://dataservice.accuweather.com'
 });
 
 const API_KEY = 'rEpvmjnVca3zACnERWGMKDG2AA9gcRux';
