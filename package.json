@@ -3,6 +3,10 @@
   "name": "weather_app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "6.9.0",
+    "node": "12.16.2"
+  },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "@material-ui/core": "^4.10.2",
