@@ -31,7 +31,7 @@ const FavoritesPage: React.FunctionComponent = () => {
     const localFavoritesList: Array<IFavoritesDetails> = useSelector((state: any) => state.favorites.favoritesDetailsList);
 
     const mapListToCards = () => {
-        if (localFavoritesList.length === 0) return <div>No Favorites</div>;
+        if (localFavoritesList.length === 0) return <div style={{ fontSize: '2vw' }}>No Favorites</div>;
         return localFavoritesList.map(favorite =>
             <Item
                 key={favorite.locationKey}
@@ -45,7 +45,7 @@ const FavoritesPage: React.FunctionComponent = () => {
 
     return (
         <StyledDiv>
-            <h1>My Favorites: </h1>
+            <h1 style={{ fontSize: '3vw' }}>My Favorites: </h1>
             <StyledItemsDiv>
                 {mapListToCards()}
             </StyledItemsDiv>
