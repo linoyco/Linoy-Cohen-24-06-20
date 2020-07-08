@@ -17,6 +17,7 @@ const GlobalStyles: any = createGlobalStyle<IPropsGlobalStyles>`
     color: ${(props: IPropsGlobalStyles) => props.textColor};
     font-family: Tahoma, Helvetica, Arial, Roboto, sans-serif;
     font-weight: bold;
+    overflow: hidden;
     
     height: 100%;
     width: 100%;
@@ -40,10 +41,6 @@ const DivStyle: any = styled.div`
   flex-direction: column;
   align-items: center;
   align-content: center;
-`;
-
-const HeaderDiv: any = styled.header`
-  width: 100%;
 `;
 
 const StyledError: any = styled.p`
@@ -79,8 +76,6 @@ const App: React.FunctionComponent = () => {
       <GlobalStyles
         backgroundColor={mode === 'light' ? 'white' : '#4E5D89'}
         textColor={mode === 'light' ? 'black' : 'white'} />
-      <HeaderDiv>
-      </HeaderDiv>
       {globalErr}
       <AppRoutes />
     </DivStyle>

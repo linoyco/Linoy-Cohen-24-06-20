@@ -32,13 +32,13 @@ const FavoritesPage: React.FunctionComponent = () => {
 
     const mapListToCards = () => {
         if (localFavoritesList.length === 0) return <div>No Favorites</div>;
-        return localFavoritesList.map((favorite, idx) =>
+        return localFavoritesList.map(favorite =>
             <Item
                 key={favorite.locationKey}
                 locationName={favorite.city}
                 imageNumber={favorite.imageNumber}
                 iconName={favorite.iconName}
-                tempFC={`${favorite.tempFC}`}
+                tempFC={`${favorite.tempFC}°C`}
             />
         );
     }

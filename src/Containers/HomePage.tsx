@@ -35,10 +35,12 @@ const StyledIconName: any = styled.p`
     flex-direction: column;
     align-items: center;
     margin-left: auto;
-    margin-right: 3%;
+    margin-right: 5%;
+    font-size: 1.3vw;
 `;
 
-const StyledDetails: any = styled.div`
+const StyledDetails: any = styled.h3`
+    font-size: 2.5vw;
     margin-left: 5%;
 `;
 
@@ -124,7 +126,7 @@ const HomePage: React.FunctionComponent = () => {
 
         fiveDays.DailyForecasts.map((day) => {
             let myObj: fiveDaysCardDetails = {
-                date: moment.parseZone(day.Date).format("MM/DD/YYYY"),
+                date: moment.parseZone(day.Date).format("DD/MM/YYYY"),
                 day: moment(day.Date).format('dddd'),
                 imageNumber: day.Day.Icon,
                 iconName: day.Day.IconPhrase,
@@ -211,13 +213,13 @@ const HomePage: React.FunctionComponent = () => {
                         <TextField {...searchBy}
                             label='Search City'
                             value={searchBy}
-                            style={{ width: '300%', maxWidth: '300px' }}
+                            style={{ width: '25vw' }}
                         />
                     </div>}
                 />
             </StyledSecDiv>
             <StyledSecDiv>
-                <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>
+                <StyledDetails>{localLocation.locationName}</StyledDetails>
                 {favoriteButton}
             </StyledSecDiv>
             <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>

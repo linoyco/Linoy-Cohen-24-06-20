@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardMedia, Card, CardContent, CardHeader } from '@material-ui/core';
+import { CardMedia, Card, CardContent, CardHeader, Typography } from '@material-ui/core';
 
 interface IProps {
     day?: string;
@@ -11,19 +11,33 @@ interface IProps {
 }
 
 const Item: React.FunctionComponent<IProps> = ({ day, date, imageNumber, iconName, tempFC, locationName }) => (
-    <Card style={{ height: '85%', margin: '1%' }}>
+    <Card style={{ height: '87%', width: '15%' }}>
         <CardHeader
-            title={day || locationName}
-            subheader={date}
+            title={
+                <Typography style={{ fontSize: '2vw', fontWeight: 'bold', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    {day || locationName}
+                </Typography>
+            }
+            subheader={
+                <Typography style={{ fontSize: '1.5vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    {date}
+                </Typography>
+            }
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
         />
         <CardMedia
             image={require(`../Images/${imageNumber}.png`)}
             title='img'
-            style={{ height: 0, paddingTop: '56%' }}
+            style={{ paddingTop: '55%' }}
         />
-        <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>{tempFC}</CardContent>
-        <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>{iconName}</CardContent>
+        <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <Typography style={{ fontSize: '1.5vw', fontWeight: 'bold' }}>
+                {tempFC}
+            </Typography>
+            <Typography style={{ fontSize: '1.5vw' }}>
+                {iconName}
+            </Typography>
+        </CardContent>
     </Card>
 );
 
