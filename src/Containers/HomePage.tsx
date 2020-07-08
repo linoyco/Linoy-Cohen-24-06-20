@@ -187,8 +187,8 @@ const HomePage: React.FunctionComponent = () => {
         dispatch(sendRemoveFavorite(localLocation.locationKey));
     }
 
-    const favoriteButton = !isFavorite ? <StyledIconName><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder /></Button>Add to favorites</StyledIconName> :
-        <StyledIconName><Button onClick={() => handleRemoveFavoriteClicked()}><DeleteOutline /></Button>Remove from favorites</StyledIconName>;
+    const favoriteButton = !isFavorite ? <StyledIconName><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder style={{ fontSize: '2.5vw' }}/></Button>Add to favorites</StyledIconName> :
+        <StyledIconName><Button onClick={() => handleRemoveFavoriteClicked()}><DeleteOutline style={{ fontSize: '2.5vw' }}/></Button>Remove from favorites</StyledIconName>;
 
     return (
         <StyledDiv>

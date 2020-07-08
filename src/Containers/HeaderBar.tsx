@@ -23,6 +23,7 @@ const StyledDiv: any = styled.div`
 const StyledTitle: any = styled.h1`
     margin-left: 1%;
     margin-right: auto;
+    font-size: 3vw;
 `;
 
 const StyledIconName: any = styled.p`
@@ -30,6 +31,7 @@ const StyledIconName: any = styled.p`
     flex-direction: column;
     align-items: center;
     margin: 8px;
+    font-size: 1.5vw;
 `;
 
 const StyledDivIcons: any = styled.div`
@@ -59,9 +61,9 @@ const HeaderBar: React.FunctionComponent = () => {
         <StyledDiv>
             <StyledTitle>National Current Weather</StyledTitle>
             <StyledDivIcons>
-                <StyledIconName><Button onClick={changeMode} style={{ color: 'white' }}><Brightness4 /></Button>Mode</StyledIconName>
-                <StyledIconName><Button onClick={() => navigateToFavorites()} style={{ color: 'white' }}><Favorite /></Button>Favorites</StyledIconName>
-                <StyledIconName><Button onClick={() => navigateToHome()} style={{ color: 'white' }}><Home /></Button>Home</StyledIconName>
+                <StyledIconName><Button onClick={changeMode} style={{ color: 'white' }}><Brightness4 style={{ fontSize: '2.5vw' }} /></Button>Mode</StyledIconName>
+                <StyledIconName><Button onClick={() => navigateToFavorites()} style={{ color: 'white' }}><Favorite style={{ fontSize: '2.5vw' }} /></Button>Favorites</StyledIconName>
+                <StyledIconName><Button onClick={() => navigateToHome()} style={{ color: 'white' }}><Home style={{ fontSize: '2.5vw' }} /></Button>Home</StyledIconName>
             </StyledDivIcons>
         </StyledDiv>
     );
