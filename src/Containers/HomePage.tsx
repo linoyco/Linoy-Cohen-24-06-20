@@ -32,12 +32,10 @@ const StyledIconName: any = styled.p`
     flex-direction: column;
     align-items: center;
     margin-left: auto;
-    margin-right: 5%;
-    font-size: 1.3vw;
+    margin-right: 3%;
 `;
 
-const StyledDetails: any = styled.h3`
-    font-size: 2.5vw;
+const StyledDetails: any = styled.div`
     margin-left: 5%;
 `;
 
@@ -210,14 +208,13 @@ const HomePage: React.FunctionComponent = () => {
                         <TextField {...searchBy}
                             label='Search City'
                             value={searchBy}
-                            style={{ width: '25vw' }}
+                            style={{ width: '300%', maxWidth: '300px' }}
                         />
                     </div>}
                 />
             </StyledSecDiv>
             <StyledSecDiv>
-                <StyledDetails>{localLocation.locationName}</StyledDetails>
-                {favoriteButton}
+                <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>                {favoriteButton}
             </StyledSecDiv>
             <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>
             <StyledItemsDiv>
