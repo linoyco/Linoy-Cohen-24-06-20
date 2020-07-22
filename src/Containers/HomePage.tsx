@@ -16,38 +16,26 @@ import { sendToFavorites, sendRemoveFavorite } from '../State/Actions/Favorites'
 import { IFavoritesDetails } from './FavoritesPage';
 
 const StyledDiv: any = styled.div`
-    margin-left: 1%;
-    margin-right: auto;
-    height: 70%;
-`;
+    margin: 1rem;
+    height: 85vh;
 
-const StyledSecDiv: any = styled.div`
-	display: flex;
-    align-items: center;
-`;
+    .SecDiv{
+        display: flex;
+        align-items: center;
+    }
 
-const StyledIconName: any = styled.p`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 3%;
-`;
+    .IconDiv{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: auto;
+    }
 
-const StyledDetails: any = styled.div`
-    margin-left: 5%;
-`;
-
-const StyledItemsDiv: any = styled.div`
-    display: flex;
-    justify-content: space-around;
-    height: 80%;
-`;
-
-const StyledError: any = styled.p`
-	font-size: 12px;
-	color: red;
-    height: 12px;
+    .WeatherDiv{
+        display: flex;
+        justify-content: space-around;
+        height: 55vh; 
+    }
 `;
 
 interface fiveDaysCardDetails {
@@ -181,12 +169,12 @@ const HomePage: React.FunctionComponent = () => {
         dispatch(sendRemoveFavorite(localLocation.locationKey));
     }
 
-    const favoriteButton = !isFavorite ? <StyledIconName><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder style={{ width: '2rem', height: '2rem' }} /></Button>Add to favorites</StyledIconName> :
-        <StyledIconName><Button onClick={() => handleRemoveFavoriteClicked()}><DeleteOutline style={{ width: '2rem', height: '2rem' }} /></Button>Remove from favorites</StyledIconName>;
+    const favoriteButton = !isFavorite ? <p className='IconDiv'><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder style={{ width: '2rem', height: '2rem' }} /></Button>Add to favorites</p> :
+        <p className='IconDiv'><Button onClick={() => handleRemoveFavoriteClicked()}><DeleteOutline style={{ width: '2rem', height: '2rem' }} /></Button>Remove from favorites</p>;
 
     return (
-        <StyledDiv >
-            <StyledSecDiv>
+        <StyledDiv>
+            <div className='SecDiv'>
                 <Autocomplete
                     blurOnSelect
                     options={localAutocompleteList}
@@ -203,52 +191,50 @@ const HomePage: React.FunctionComponent = () => {
                         }
                     }}
                     renderInput={(searchBy) => <div>
-                        <StyledError>{errorValidation}</StyledError>
+                        <p className='hhFWoK'>{errorValidation}</p>
                         <TextField {...searchBy}
-                            label='Search City'
+                            label='Search'
                             value={searchBy}
-                            style={{ width: '300%', maxWidth: '300px' }}
+                            style={{ width: '20vw'}}
                         />
                     </div>}
-                />
-            </StyledSecDiv>
-            <StyledSecDiv>
-                <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>{favoriteButton}
-            </StyledSecDiv>
+                />{favoriteButton}
+            </div>
+            <div>Tel-Aviv{localLocation.locationName}</div>
             <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>
-            <StyledItemsDiv>
+            <div className='WeatherDiv'>
                 {/* {mapFiveDaysToCard()} */}
                 <Item
-                    locationName={'city'}
+                    locationName={'cityyyyyy'}
                     imageNumber={5}
                     iconName={'iconName'}
                     tempFC={'`${tempFC}°C`'}
                 />
                 <Item
-                    locationName={'city'}
+                    locationName={'cityyyyyy'}
                     imageNumber={5}
                     iconName={'iconName'}
                     tempFC={'`${tempFC}°C`'}
                 />
                 <Item
-                    locationName={'city'}
+                    locationName={'cityyyyyy'}
                     imageNumber={5}
                     iconName={'iconName'}
                     tempFC={'`${tempFC}°C`'}
                 />
                 <Item
-                    locationName={'city'}
+                    locationName={'cityyyyyy'}
                     imageNumber={5}
                     iconName={'iconName'}
                     tempFC={'`${tempFC}°C`'}
                 />
                 <Item
-                    locationName={'city'}
+                    locationName={'cityyyyyy'}
                     imageNumber={5}
                     iconName={'iconName'}
                     tempFC={'`${tempFC}°C`'}
                 />
-            </StyledItemsDiv>
+            </div>
         </StyledDiv>
     );
 }

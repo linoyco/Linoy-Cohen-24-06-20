@@ -49,28 +49,28 @@ const FavoritesPage: React.FunctionComponent = () => {
             <StyledItemsDiv>
                 {/* {mapListToCards()} */}
                 <Item
-                    locationName={'city'}
+                    locationName={'cityyyyyy'}
                     imageNumber={5}
                     iconName={'iconName'}
                     tempFC={'`${tempFC}°C`'}
                 />
 
                 <Item
-                    locationName={'city'}
+                    locationName={'cityyyyyy'}
                     imageNumber={5}
                     iconName={'iconName'}
                     tempFC={'`${tempFC}°C`'}
                 />
 
                 <Item
-                    locationName={'city'}
+                    locationName={'cityyyyyy'}
                     imageNumber={5}
                     iconName={'iconName'}
                     tempFC={'`${tempFC}°C`'}
                 />
 
                 <Item
-                    locationName={'city'}
+                    locationName={'cityyyyyy'}
                     imageNumber={5}
                     iconName={'iconName'}
                     tempFC={'`${tempFC}°C`'}
