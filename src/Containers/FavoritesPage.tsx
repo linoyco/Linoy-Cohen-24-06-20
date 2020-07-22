@@ -47,7 +47,34 @@ const FavoritesPage: React.FunctionComponent = () => {
         <StyledDiv>
             <h1 style={{ fontSize: '3vw' }}>My Favorites: </h1>
             <StyledItemsDiv>
-                {mapListToCards()}
+                {/* {mapListToCards()} */}
+                <Item
+                    locationName={'city'}
+                    imageNumber={5}
+                    iconName={'iconName'}
+                    tempFC={'`${tempFC}°C`'}
+                />
+
+                <Item
+                    locationName={'city'}
+                    imageNumber={5}
+                    iconName={'iconName'}
+                    tempFC={'`${tempFC}°C`'}
+                />
+
+                <Item
+                    locationName={'city'}
+                    imageNumber={5}
+                    iconName={'iconName'}
+                    tempFC={'`${tempFC}°C`'}
+                />
+
+                <Item
+                    locationName={'city'}
+                    imageNumber={5}
+                    iconName={'iconName'}
+                    tempFC={'`${tempFC}°C`'}
+                />
             </StyledItemsDiv>
         </StyledDiv>
     );

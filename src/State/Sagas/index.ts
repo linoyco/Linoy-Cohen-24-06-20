@@ -6,10 +6,10 @@ import { watchCurrentWeather } from './favorites';
 
 export default function* rootSaga() {
 	yield all([
-		watchAutocomplete(),
-		watchFiveDaysWeather(),
-		watchFCMode(),
-		watchGeolocation(),
-		watchCurrentWeather()
+		// watchAutocomplete(),
+		// watchFiveDaysWeather(),
+		// watchFCMode(),
+		// watchGeolocation(),
+		// watchCurrentWeather()
 	]);
 }

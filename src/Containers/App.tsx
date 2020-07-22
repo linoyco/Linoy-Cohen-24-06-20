@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 import AppRoutes from './AppRoutes';
 import { currentGeolocation } from '../State/Actions/App';
@@ -16,37 +16,19 @@ const GlobalStyles: any = createGlobalStyle<IPropsGlobalStyles>`
     background: ${(props: IPropsGlobalStyles) => props.backgroundColor};
     color: ${(props: IPropsGlobalStyles) => props.textColor};
     font-family: Tahoma, Helvetica, Arial, Roboto, sans-serif;
-    font-weight: bold;
-    overflow: hidden;
-    
-    height: 100%;
-    width: 100%;
+    // overflow: hidden;
   }
+  
   body{
-    height: 100%;
-    width: 100%;
     margin: 0px;
   }
-  #root {
-    height: 100%;
-  }
-`;
 
-const DivStyle: any = styled.div`
-  height: 100%;
-  width: 100%;
-  margin: 0px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-`;
-
-const StyledError: any = styled.p`
-	font-size: 12px;
-	color: red;
+  .hhFWoK{
+    font-size: 12px;
+    color: red;
     height: 12px;
+    font-weight: bold;
+  }
 `;
 
 const App: React.FunctionComponent = () => {
@@ -69,16 +51,16 @@ const App: React.FunctionComponent = () => {
     });
   }
 
-  const globalErr = (error ? <StyledError>{error}</StyledError> : null);
+  const globalErr = (error ? <p className='hhFWoK'>{error}</p> : null);
 
   return (
-    <DivStyle>
+    <div>
       <GlobalStyles
         backgroundColor={mode === 'light' ? 'white' : '#4E5D89'}
         textColor={mode === 'light' ? 'black' : 'white'} />
       {globalErr}
       <AppRoutes />
-    </DivStyle>
+    </div>
   );
 }
 

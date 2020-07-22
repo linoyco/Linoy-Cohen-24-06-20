@@ -18,7 +18,6 @@ import { IFavoritesDetails } from './FavoritesPage';
 const StyledDiv: any = styled.div`
     margin-left: 1%;
     margin-right: auto;
-    width: 100%;
     height: 70%;
 `;
 
@@ -182,8 +181,8 @@ const HomePage: React.FunctionComponent = () => {
         dispatch(sendRemoveFavorite(localLocation.locationKey));
     }
 
-    const favoriteButton = !isFavorite ? <StyledIconName><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder style={{ fontSize: '2.5vw' }} /></Button>Add to favorites</StyledIconName> :
-        <StyledIconName><Button onClick={() => handleRemoveFavoriteClicked()}><DeleteOutline style={{ fontSize: '2.5vw' }} /></Button>Remove from favorites</StyledIconName>;
+    const favoriteButton = !isFavorite ? <StyledIconName><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder style={{ width: '2rem', height: '2rem' }} /></Button>Add to favorites</StyledIconName> :
+        <StyledIconName><Button onClick={() => handleRemoveFavoriteClicked()}><DeleteOutline style={{ width: '2rem', height: '2rem' }} /></Button>Remove from favorites</StyledIconName>;
 
     return (
         <StyledDiv >
@@ -214,11 +213,41 @@ const HomePage: React.FunctionComponent = () => {
                 />
             </StyledSecDiv>
             <StyledSecDiv>
-                <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>                {favoriteButton}
+                <StyledDetails><h1>{localLocation.locationName}<br /></h1></StyledDetails>{favoriteButton}
             </StyledSecDiv>
             <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>
             <StyledItemsDiv>
-                {mapFiveDaysToCard()}
+                {/* {mapFiveDaysToCard()} */}
+                <Item
+                    locationName={'city'}
+                    imageNumber={5}
+                    iconName={'iconName'}
+                    tempFC={'`${tempFC}°C`'}
+                />
+                <Item
+                    locationName={'city'}
+                    imageNumber={5}
+                    iconName={'iconName'}
+                    tempFC={'`${tempFC}°C`'}
+                />
+                <Item
+                    locationName={'city'}
+                    imageNumber={5}
+                    iconName={'iconName'}
+                    tempFC={'`${tempFC}°C`'}
+                />
+                <Item
+                    locationName={'city'}
+                    imageNumber={5}
+                    iconName={'iconName'}
+                    tempFC={'`${tempFC}°C`'}
+                />
+                <Item
+                    locationName={'city'}
+                    imageNumber={5}
+                    iconName={'iconName'}
+                    tempFC={'`${tempFC}°C`'}
+                />
             </StyledItemsDiv>
         </StyledDiv>
     );
