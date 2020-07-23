@@ -35,6 +35,11 @@ const StyledDiv: any = styled.div`
         display: flex;
         justify-content: space-around;
         height: 55vh; 
+        padding: 1rem;
+    }
+
+    .City{
+        font-weight: bold;
     }
 `;
 
@@ -200,7 +205,7 @@ const HomePage: React.FunctionComponent = () => {
                     </div>}
                 />{favoriteButton}
             </div>
-            <div>Tel-Aviv{localLocation.locationName}</div>
+            <div className='City'>Tel-Aviv{localLocation.locationName}</div><br/>
             <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>
             <div className='WeatherDiv'>
                 {/* {mapFiveDaysToCard()} */}

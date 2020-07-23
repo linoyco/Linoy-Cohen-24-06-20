@@ -1,5 +1,31 @@
 import React from 'react';
-import { CardMedia, Card, CardContent, CardHeader } from '@material-ui/core';
+import { CardMedia, Card } from '@material-ui/core';
+import styled from 'styled-components';
+
+const StyledDiv: any = styled.div`
+    .Card{
+        background-color: #F1F1F1;
+        margin: 1%;
+    }
+
+    .CardHeader{
+        display: flex; 
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .CardSubHeader{
+        display: flex; 
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .Image{
+
+    }
+`;
 
 interface IProps {
     day?: string;
@@ -11,20 +37,19 @@ interface IProps {
 }
 
 const Item: React.FunctionComponent<IProps> = ({ day, date, imageNumber, iconName, tempFC, locationName }) => (
-    <Card style={{ height: '85%', margin: '1%' }}>
-        <CardHeader
-            title={day || locationName}
-            subheader={date}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
-        />
-        <CardMedia
-            image={require(`../Images/${imageNumber}.png`)}
-            title='img'
-            style={{ height: 0, paddingTop: '56%' }}
-        />
-        <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>{tempFC}</CardContent>
-        <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>{iconName}</CardContent>
-    </Card>
+    <StyledDiv>
+        <Card className='Card'>
+            <p className='CardHeader'>{day || locationName}</p>
+            <p className='CardSubHeader'>{date}</p>
+            <CardMedia className='Image'
+                image={require(`../Images/${imageNumber}.png`)}
+                title='img'
+                style={{ paddingTop: '56%' }}
+            />
+            <p className='CardSubHeader'>{tempFC}</p>
+            <p className='CardSubHeader'>{iconName}</p>
+        </Card>
+    </StyledDiv>
 );
 
 export default Item;
