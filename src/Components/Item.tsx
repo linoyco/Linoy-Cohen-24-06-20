@@ -6,6 +6,9 @@ const StyledDiv: any = styled.div`
     .Card{
         background-color: #F1F1F1;
         margin: 1%;
+        padding: 0.3rem;
+        width: 15vw;
+        height: 50vh;
     }
 
     .CardHeader{

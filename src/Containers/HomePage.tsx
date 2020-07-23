@@ -174,8 +174,8 @@ const HomePage: React.FunctionComponent = () => {
         dispatch(sendRemoveFavorite(localLocation.locationKey));
     }
 
-    const favoriteButton = !isFavorite ? <p className='IconDiv'><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder style={{ width: '2rem', height: '2rem' }} /></Button>Add to favorites</p> :
-        <p className='IconDiv'><Button onClick={() => handleRemoveFavoriteClicked()}><DeleteOutline style={{ width: '2rem', height: '2rem' }} /></Button>Remove from favorites</p>;
+    const favoriteButton = !isFavorite ? <p className='IconDiv'><Button onClick={() => handleAddFavoriteClicked()}><FavoriteBorder /></Button>Add to favorites</p> :
+        <p className='IconDiv'><Button onClick={() => handleRemoveFavoriteClicked()}><DeleteOutline /></Button>Remove from favorites</p>;
 
     return (
         <StyledDiv>
@@ -200,45 +200,15 @@ const HomePage: React.FunctionComponent = () => {
                         <TextField {...searchBy}
                             label='Search'
                             value={searchBy}
-                            style={{ width: '20vw'}}
+                            style={{ width: '20vw' }}
                         />
                     </div>}
                 />{favoriteButton}
             </div>
-            <div className='City'>Tel-Aviv{localLocation.locationName}</div><br/>
-            <Button style={{ marginLeft: '4%' }} onClick={() => handleFCMode()}>F\C</Button>
+            <div className='City'>{localLocation.locationName}</div><br />
+            <Button onClick={() => handleFCMode()}>F\C</Button>
             <div className='WeatherDiv'>
-                {/* {mapFiveDaysToCard()} */}
-                <Item
-                    locationName={'cityyyyyy'}
-                    imageNumber={5}
-                    iconName={'iconName'}
-                    tempFC={'`${tempFC}°C`'}
-                />
-                <Item
-                    locationName={'cityyyyyy'}
-                    imageNumber={5}
-                    iconName={'iconName'}
-                    tempFC={'`${tempFC}°C`'}
-                />
-                <Item
-                    locationName={'cityyyyyy'}
-                    imageNumber={5}
-                    iconName={'iconName'}
-                    tempFC={'`${tempFC}°C`'}
-                />
-                <Item
-                    locationName={'cityyyyyy'}
-                    imageNumber={5}
-                    iconName={'iconName'}
-                    tempFC={'`${tempFC}°C`'}
-                />
-                <Item
-                    locationName={'cityyyyyy'}
-                    imageNumber={5}
-                    iconName={'iconName'}
-                    tempFC={'`${tempFC}°C`'}
-                />
+                {mapFiveDaysToCard()}
             </div>
         </StyledDiv>
     );

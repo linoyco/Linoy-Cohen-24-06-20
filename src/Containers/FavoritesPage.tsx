@@ -5,17 +5,14 @@ import styled from 'styled-components';
 import Item from '../Components/Item';
 
 const StyledDiv: any = styled.div`
-    margin-left: 1%;
-    margin-right: auto;
-    width: 100%;
-    height: 70%;
-`;
+    padding: 1rem;
 
-const StyledItemsDiv: any = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 80%;
+    .ItemsDiv{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
 `;
 
 export interface IFavoritesDetails {
@@ -45,37 +42,10 @@ const FavoritesPage: React.FunctionComponent = () => {
 
     return (
         <StyledDiv>
-            <h1 style={{ fontSize: '3vw' }}>My Favorites: </h1>
-            <StyledItemsDiv>
-                {/* {mapListToCards()} */}
-                <Item
-                    locationName={'cityyyyyy'}
-                    imageNumber={5}
-                    iconName={'iconName'}
-                    tempFC={'`${tempFC}°C`'}
-                />
-
-                <Item
-                    locationName={'cityyyyyy'}
-                    imageNumber={5}
-                    iconName={'iconName'}
-                    tempFC={'`${tempFC}°C`'}
-                />
-
-                <Item
-                    locationName={'cityyyyyy'}
-                    imageNumber={5}
-                    iconName={'iconName'}
-                    tempFC={'`${tempFC}°C`'}
-                />
-
-                <Item
-                    locationName={'cityyyyyy'}
-                    imageNumber={5}
-                    iconName={'iconName'}
-                    tempFC={'`${tempFC}°C`'}
-                />
-            </StyledItemsDiv>
+            <h2>My Favorites: </h2>
+            <div className='ItemsDiv'>
+                {mapListToCards()}
+            </div>
         </StyledDiv>
     );
 }
