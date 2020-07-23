@@ -11,32 +11,27 @@ import { changeModeStyle } from '../State/Actions/App';
 
 const StyledDiv: any = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
 
     background-color: #4E5D89;
     color: white;
-    width: 100%;
-`;
 
-const StyledTitle: any = styled.h1`
-    margin-left: 1%;
-    margin-right: auto;
-    font-size: 3vw;
-`;
+    .IconName{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 80%;
+    }
 
-const StyledIconName: any = styled.p`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 8px;
-    font-size: 1.5vw;
-`;
+    .IconsDiv{
+        display: flex;
+    }
 
-const StyledDivIcons: any = styled.div`
-    display: flex;
-    margin-right: 1%;
+    Button{
+        color: white;
+    }
 `;
 
 const HeaderBar: React.FunctionComponent = () => {
@@ -59,12 +54,12 @@ const HeaderBar: React.FunctionComponent = () => {
 
     return (
         <StyledDiv>
-            <StyledTitle>National Current Weather</StyledTitle>
-            <StyledDivIcons>
-                <StyledIconName><Button onClick={changeMode} style={{ color: 'white' }}><Brightness4 style={{ fontSize: '2.5vw' }} /></Button>Mode</StyledIconName>
-                <StyledIconName><Button onClick={() => navigateToFavorites()} style={{ color: 'white' }}><Favorite style={{ fontSize: '2.5vw' }} /></Button>Favorites</StyledIconName>
-                <StyledIconName><Button onClick={() => navigateToHome()} style={{ color: 'white' }}><Home style={{ fontSize: '2.5vw' }} /></Button>Home</StyledIconName>
-            </StyledDivIcons>
+            <h2>National Current Weather</h2>
+            <div className='IconsDiv'>
+                <div className='IconName'><Button onClick={changeMode}><Brightness4 /></Button>Mode</div>
+                <div className='IconName'><Button onClick={() => navigateToFavorites()}><Favorite /></Button>Favorites</div>
+                <div className='IconName'><Button onClick={() => navigateToHome()}><Home /></Button>Home</div>
+            </div>
         </StyledDiv>
     );
 }
