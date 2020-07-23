@@ -33,7 +33,7 @@ const StyledDiv: any = styled.div`
 
     .WeatherDiv{
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         height: 55vh; 
         padding: 1rem;
     }

@@ -43,7 +43,7 @@ const Item: React.FunctionComponent<IProps> = ({ day, date, imageNumber, iconNam
     <StyledDiv>
         <Card className='Card'>
             <p className='CardHeader'>{day || locationName}</p>
-            <p className='CardSubHeader'>{date}</p>
+            <p className='CardSubHeader' style={{fontSize: '0.6rem', fontWeight: 'bold'}}>{date}</p>
             <CardMedia className='Image'
                 image={require(`../Images/${imageNumber}.png`)}
                 title='img'
